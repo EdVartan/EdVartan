@@ -3,289 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Рационални числа – пълно обяснение, примери и задачи за 7. клас по програмата на МОН">
     <title>Рационални числа – Математика 7. клас</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f9ff;
-            color: #333;
-            line-height: 1.6;
-        }
-        header {
-            background: linear-gradient(135deg, #1e40af, #3b82f6);
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin:0; padding:0; background:#f0f9ff; color:#333; line-height:1.6; }
+        header { background:linear-gradient(135deg, #1e40af, #3b82f6); color:white; text-align:center; padding:60px 20px; }
+        header h1 { font-size:2.8rem; margin:0; }
+        nav { background:#1e293b; padding:15px 0; text-align:center; position:sticky; top:0; z-index:100; }
+        nav a { color:white; text-decoration:none; margin:0 25px; font-weight:600; }
+        nav a:hover { color:#93c5fd; }
+        .container { max-width:1100px; margin:40px auto; padding:0 20px; }
+        .section { background:white; border-radius:16px; padding:35px; margin-bottom:40px; box-shadow:0 6px 20px rgba(0,0,0,0.08); }
+        h2 { color:#1e40af; border-bottom:4px solid #dbeafe; padding-bottom:12px; }
+
+        /* Нов стил за tooltip – над точката */
+        .tooltip {
+            position: absolute;
+            background: #333;
             color: white;
-            text-align: center;
-            padding: 60px 20px;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+            white-space: nowrap;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
         }
-        header h1 { font-size: 2.8rem; margin: 0; }
-        nav {
-            background-color: #1e293b;
-            padding: 15px 0;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -10px;
+            border: 10px solid transparent;
+            border-top-color: #333;
         }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 25px;
-            font-weight: 600;
+        .tooltip.visible {
+            opacity: 1;
         }
-        nav a:hover { color: #93c5fd; }
-        .container {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-        .section {
-            background: white;
-            border-radius: 16px;
-            padding: 35px;
-            margin-bottom: 40px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-        }
-        h2 {
-            color: #1e40af;
-            border-bottom: 4px solid #dbeafe;
-            padding-bottom: 12px;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            margin: 20px 0;
-            display: block;
-        }
-        .example {
-            background: #eff6ff;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 5px solid #3b82f6;
-            margin: 15px 0;
-            font-size: 1.1rem;
-        }
-        /* Перфектни дроби */
-        .frac {
-            display: inline-block;
-            vertical-align: middle;
-            text-align: center;
-            font-size: 1.2em;
-        }
-        .frac > sup {
-            display: block;
-            font-size: 0.7em;
-            line-height: 1;
-        }
-        .frac > sub {
-            display: block;
-            font-size: 0.7em;
-            line-height: 1;
-            border-top: 1px solid #000;
-            padding-top: 2px;
-        }
-        .test {
-            background: #f8fafc;
-            padding: 20px;
-            border-radius: 12px;
-            margin-top: 20px;
-        }
-        .question {
-            margin-bottom: 20px;
-        }
-        button {
-            background: #3b82f6;
-            color: white;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 8px;
+
+        circle { transition: r 0.3s, filter 0.3s; }
+        circle:hover {
+            r: 16;
+            filter: brightness(1.5);
             cursor: pointer;
-            font-size: 1.1rem;
-        }
-        button:hover { background: #1e40af; }
-        #result { margin-top: 20px; font-weight: bold; font-size: 1.2rem; }
-        footer {
-            background-color: #1e293b;
-            color: white;
-            text-align: center;
-            padding: 30px;
-            margin-top: 60px;
         }
     </style>
 </head>
 <body>
-
     <header>
-        <h1>Рационални числа</h1>
-        <p>Пълно обяснение и примери за 7. клас според програмата на МОН</p>
+        <h1>Рационални числа 🚀</h1>
+        <p>Забавно и лесно за 7. клас!</p>
     </header>
 
-    <nav>
-        <a href="index.html">Начало</a>
-        <a href="index.html#temi">Теми</a>
-        <a href="index.html#zadachi">Задачи</a>
-        <a href="index.html#kontakt">Контакт</a>
-    </nav>
-
     <div class="container">
-
         <div class="section">
-            <h2>Какво са рационални числа?</h2>
-            <p>Рационалните числа (ℚ) са всички числа, които могат да се запишат като дроб <span class="frac"><sup>p</sup><sub>q</sub></span>, където <strong>p</strong> е цяло число, а <strong>q</strong> е естествено число (q ≠ 0).</p>
-            <div class="example">
-                <strong>Примери:</strong><br>
-                • Цели: 5 = <span class="frac"><sup>5</sup><sub>1</sub></span>, -3 = <span class="frac"><sup>-3</sup><sub>1</sub></span><br>
-                • Дроби: <span class="frac"><sup>1</sup><sub>2</sub></span>, <span class="frac"><sup>-3</sup><sub>4</sub></span><br>
-                • Десетични: 0.75 = <span class="frac"><sup>3</sup><sub>4</sub></span>, -2.5 = <span class="frac"><sup>-5</sup><sub>2</sub></span>
+            <h2>Числова ос – задръж мишката върху цветните кръгчета!</h2>
+            <p>Виж кое рационално число е на всяка точка – балончето излиза точно над нея! 😊</p>
+
+            <div style="position: relative;">
+                <!-- Tooltip елементът -->
+                <div class="tooltip" id="tooltip"></div>
+
+                <!-- Числовата ос -->
+                <svg width="100%" height="300" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" style="max-width:800px; background:#fff; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); margin:20px auto; display:block;">
+                    <line x1="50" y1="180" x2="750" y2="180" stroke="#000" stroke-width="5"/>
+                    <polygon points="750,180 740,170 740,190" fill="#000"/>
+                    <polygon points="50,180 60,170 60,190" fill="#000"/>
+
+                    <!-- Маркировки за цели числа -->
+                    <line x1="100" y1="170" x2="100" y2="190" stroke="#000" stroke-width="3"/><text x="100" y="210" text-anchor="middle" font-size="20">-4</text>
+                    <line x1="200" y1="170" x2="200" y2="190" stroke="#000" stroke-width="3"/><text x="200" y="210" text-anchor="middle" font-size="20">-3</text>
+                    <line x1="300" y1="170" x2="300" y2="190" stroke="#000" stroke-width="3"/><text x="300" y="210" text-anchor="middle" font-size="20">-2</text>
+                    <line x1="400" y1="170" x2="400" y2="190" stroke="#000" stroke-width="3"/><text x="400" y="210" text-anchor="middle" font-size="20">-1</text>
+                    <line x1="500" y1="165" x2="500" y2="195" stroke="#000" stroke-width="5"/><text x="500" y="210" text-anchor="middle" font-size="24" font-weight="bold">0</text>
+                    <line x1="600" y1="170" x2="600" y2="190" stroke="#000" stroke-width="3"/><text x="600" y="210" text-anchor="middle" font-size="20">1</text>
+                    <line x1="700" y1="170" x2="700" y2="190" stroke="#000" stroke-width="3"/><text x="700" y="210" text-anchor="middle" font-size="20">2</text>
+
+                    <!-- Цветните точки с уникални id-та -->
+                    <circle id="p1" cx="250" cy="180" r="12" fill="#e91e63" data-value="-5/2"/>
+                    <circle id="p2" cx="350" cy="180" r="12" fill="#ff9800" data-value="-3/2"/>
+                    <circle id="p3" cx="450" cy="180" r="12" fill="#4caf50" data-value="-1/2"/>
+                    <circle id="p4" cx="550" cy="180" r="12" fill="#2196f3" data-value="1/2"/>
+                    <circle id="p5" cx="650" cy="180" r="12" fill="#9c27b0" data-value="3/2"/>
+                </svg>
             </div>
         </div>
-<div class="section">
-    <h2>Изобразяване на числова ос</h2>
-    <p>Рационалните числа се поставят на <strong>числова ос</strong>: 0 в средата, положителните вдясно (→), отрицателните вляво (←). Колкото по-надясно е числото, толкова е по-голямо.</p>
-    <p>Ето примери с дроби:</p>
-
-    <!-- Първа илюстрация -->
-    <svg width="100%" height="200" viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg" style="max-width:800px; background:#fff; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); margin:20px auto; display:block;">
-      <line x1="50" y1="100" x2="750" y2="100" stroke="#333" stroke-width="4"/>
-      <polygon points="750,100 740,90 740,110" fill="#333"/>
-      <polygon points="50,100 60,90 60,110" fill="#333"/>
-      <line x1="150" y1="90" x2="150" y2="110" stroke="#333" stroke-width="3"/>
-      <text x="150" y="130" text-anchor="middle" font-size="20">-3</text>
-      <line x1="250" y1="90" x2="250" y2="110" stroke="#333" stroke-width="3"/>
-      <text x="250" y="130" text-anchor="middle" font-size="20">-2</text>
-      <line x1="350" y1="90" x2="350" y2="110" stroke="#333" stroke-width="3"/>
-      <text x="350" y="130" text-anchor="middle" font-size="20">-1</text>
-      <line x1="450" y1="85" x2="450" y2="115" stroke="#333" stroke-width="4"/>
-      <text x="450" y="130" text-anchor="middle" font-size="24" font-weight="bold">0</text>
-      <line x1="550" y1="90" x2="550" y2="110" stroke="#333" stroke-width="3"/>
-      <text x="550" y="130" text-anchor="middle" font-size="20">1</text>
-      <line x1="650" y1="90" x2="650" y2="110" stroke="#333" stroke-width="3"/>
-      <text x="650" y="130" text-anchor="middle" font-size="20">2</text>
-      <line x1="750" y1="90" x2="750" y2="110" stroke="#333" stroke-width="3"/>
-      <text x="750" y="130" text-anchor="middle" font-size="20">3</text>
-      <circle cx="300" cy="100" r="10" fill="#ff5722"/>
-      <text x="300" y="70" text-anchor="middle" font-size="18">-3/2</text>
-      <circle cx="400" cy="100" r="10" fill="#4caf50"/>
-      <text x="400" y="70" text-anchor="middle" font-size="18">-1/2</text>
-      <circle cx="500" cy="100" r="10" fill="#2196f3"/>
-      <text x="500" y="70" text-anchor="middle" font-size="18">1/2</text>
-      <circle cx="625" cy="100" r="10" fill="#9c27b0"/>
-      <text x="625" y="70" text-anchor="middle" font-size="18">7/4</text>
-    </svg>
-
-    <!-- Втора илюстрация с повече примери -->
-    <svg width="100%" height="250" viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg" style="max-width:800px; background:#fff; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); margin:20px auto; display:block;">
-      <text x="400" y="30" text-anchor="middle" font-size="28" font-weight="bold">Числова ос с рационални числа</text>
-      <line x1="50" y1="150" x2="750" y2="150" stroke="#000" stroke-width="5"/>
-      <polygon points="750,150 740,140 740,160" fill="#000"/>
-      <polygon points="50,150 60,140 60,160" fill="#000"/>
-      <line x1="100" y1="140" x2="100" y2="160" stroke="#000" stroke-width="3"/>
-      <text x="100" y="180" text-anchor="middle" font-size="20">-4</text>
-      <line x1="200" y1="140" x2="200" y2="160" stroke="#000" stroke-width="3"/>
-      <text x="200" y="180" text-anchor="middle" font-size="20">-3</text>
-      <line x1="300" y1="140" x2="300" y2="160" stroke="#000" stroke-width="3"/>
-      <text x="300" y="180" text-anchor="middle" font-size="20">-2</text>
-      <line x1="400" y1="140" x2="400" y2="160" stroke="#000" stroke-width="3"/>
-      <text x="400" y="180" text-anchor="middle" font-size="20">-1</text>
-      <line x1="500" y1="135" x2="500" y2="165" stroke="#000" stroke-width="5"/>
-      <text x="500" y="180" text-anchor="middle" font-size="20" font-weight="bold">0</text>
-      <line x1="600" y1="140" x2="600" y2="160" stroke="#000" stroke-width="3"/>
-      <text x="600" y="180" text-anchor="middle" font-size="20">1</text>
-      <line x1="700" y1="140" x2="700" y2="160" stroke="#000" stroke-width="3"/>
-      <text x="700" y="180" text-anchor="middle" font-size="20">2</text>
-      <circle cx="250" cy="150" r="12" fill="#e91e63"/>
-      <text x="250" y="120" text-anchor="middle" font-size="18">-5/2</text>
-      <circle cx="350" cy="150" r="12" fill="#ff9800"/>
-      <text x="350" y="120" text-anchor="middle" font-size="18">-3/2</text>
-      <circle cx="450" cy="150" r="12" fill="#4caf50"/>
-      <text x="450" y="120" text-anchor="middle" font-size="18">-1/2</text>
-      <circle cx="550" cy="150" r="12" fill="#2196f3"/>
-      <text x="550" y="120" text-anchor="middle" font-size="18">1/2</text>
-      <circle cx="650" cy="150" r="12" fill="#9c27b0"/>
-      <text x="650" y="120" text-anchor="middle" font-size="18">3/2</text>
-    </svg>
-</div>    
-        
-            <h2>Сравняване и модул</h2>
-            <p>На числовата ос лявото число е по-малко. Модулът |a| е разстоянието до 0 (винаги ≥ 0).</p>
-            <div class="example">
-                • -3 &lt; -1 &lt; 0 &lt; <span class="frac"><sup>1</sup><sub>2</sub></span> &lt; 2<br>
-                • |-5| = 5, |3.5| = 3.5
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>Действия с рационални числа</h2>
-            <p>Правилата са същите като за дроби.</p>
-            <div class="example">
-                <strong>Събиране/Изваждане:</strong> -4 + 1.5 = -2.5<br>
-                <strong>Умножение:</strong> (-3) × <span class="frac"><sup>2</sup><sub>5</sub></span> = <span class="frac"><sup>-6</sup><sub>5</sub></span><br>
-                <strong>Деление:</strong> -8 ÷ 2 = -4
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>Интерактивен тест – провери знанията си!</h2>
-            <div class="test">
-                <div class="question">1. Кое от следните НЕ е рационално число?<br>
-                    <input type="radio" name="q1" value="wrong"> -5<br>
-                    <input type="radio" name="q1" value="correct"> π (числото пи)<br>
-                    <input type="radio" name="q1" value="wrong"> 0.25
-                </div>
-                <div class="question">2. |-7| = ?<br>
-                    <input type="text" id="q2">
-                </div>
-                <div class="question">3. -2.5 + 5 = ?<br>
-                    <input type="text" id="q3">
-                </div>
-                <div class="question">4. (-4) × (-1/2) = ?<br>
-                    <input type="text" id="q4">
-                </div>
-                <div class="question">5. Кое е по-голямо: -3/2 или -1?<br>
-                    <input type="radio" name="q5" value="wrong"> -3/2<br>
-                    <input type="radio" name="q5" value="correct"> -1
-                </div>
-                <div class="question">6. 0.8 = ? като обикновена дроб<br>
-                    <input type="text" id="q6" placeholder="напр. 4/5">
-                </div>
-                <div class="question">7. -6 ÷ 3 = ?<br>
-                    <input type="text" id="q7">
-                </div>
-                <div class="question">8. Кое число е по-малко: -4.2 или -4?<br>
-                    <input type="radio" name="q8" value="correct"> -4.2<br>
-                    <input type="radio" name="q8" value="wrong"> -4
-                </div>
-
-                <button onclick="checkTest()">Провери отговорите</button>
-                <div id="result"></div>
-            </div>
-        </div>
-
     </div>
 
-    <footer>
-        <p>&copy; 2025 Математика 7. клас – За български ученици с ❤</p>
-    </footer>
-
     <script>
-        function checkTest() {
-            let score = 0;
-            if (document.querySelector('input[name="q1"]:checked')?.value === "correct") score++;
-            if (document.getElementById('q2').value.trim() === "7") score++;
-            if (document.getElementById('q3').value.trim() === "2.5") score++;
-            if (document.getElementById('q4').value.trim() === "2") score++;
-            if (document.querySelector('input[name="q5"]:checked')?.value === "correct") score++;
-            if (document.getElementById('q6').value.trim() === "4/5" || document.getElementById('q6').value.trim() === "8/10") score++;
-            if (document.getElementById('q7').value.trim() === "-2") score++;
-            if (document.querySelector('input[name="q8"]:checked')?.value === "correct") score++;
+        const tooltip = document.getElementById('tooltip');
 
-            document.getElementById('result').innerHTML = `Точки: ${score}/8<br>Браво! Продължавай да упражняваш! ✨`;
-        }
+        const points = [
+            { id: 'p1', value: '-5/2', cx: 250 },
+            { id: 'p2', value: '-3/2', cx: 350 },
+            { id: 'p3', value: '-1/2', cx: 450 },
+            { id: 'p4', value: '1/2',   cx: 550 },
+            { id: 'p5', value: '3/2',   cx: 650 }
+        ];
+
+        points.forEach(point => {
+            const circle = document.getElementById(point.id);
+
+            circle.addEventListener('mouseenter', function() {
+                tooltip.textContent = point.value;
+                tooltip.classList.add('visible');
+
+                // Позициониране точно над точката (в средата)
+                const svg = circle.ownerSVGElement;
+                const pt = svg.createSVGPoint();
+                pt.x = point.cx;
+                pt.y = 180 - 40; // малко над оста
+
+                const svgRect = svg.getBoundingClientRect();
+                const screenPt = pt.matrixTransform(svg.getScreenCTM());
+
+                tooltip.style.left = (screenPt.x - tooltip.offsetWidth / 2) + 'px';
+                tooltip.style.top = (screenPt.y - tooltip.offsetHeight - 15) + 'px'; // 15px разстояние + стрелка
+            });
+
+            circle.addEventListener('mouseleave', function() {
+                tooltip.classList.remove('visible');
+            });
+        });
     </script>
-
 </body>
 </html>
