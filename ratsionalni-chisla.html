@@ -14,119 +14,109 @@
         .container { max-width:1100px; margin:40px auto; padding:0 20px; }
         .section { background:white; border-radius:16px; padding:35px; margin-bottom:40px; box-shadow:0 6px 20px rgba(0,0,0,0.08); }
         h2 { color:#1e40af; border-bottom:4px solid #dbeafe; padding-bottom:12px; }
-
-        /* Нов стил за tooltip – над точката */
+        .example { background:#eff6ff; padding:15px; border-radius:8px; border-left:5px solid #3b82f6; margin:15px 0; font-size:1.1rem; }
+        .frac { display:inline-block; vertical-align:middle; text-align:center; font-size:1.2em; }
+        .frac > sup { display:block; font-size:0.7em; line-height:1; }
+        .frac > sub { display:block; font-size:0.7em; line-height:1; border-top:1px solid #000; padding-top:2px; }
         .tooltip {
             position: absolute;
             background: #333;
             color: white;
-            padding: 10px 16px;
-            border-radius: 10px;
-            font-size: 20px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 18px;
             font-weight: bold;
             pointer-events: none;
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity 0.3s, transform 0.2s;
+            transform: translateY(10px);
             z-index: 1000;
-            white-space: nowrap;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
         }
-        .tooltip::after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -10px;
-            border: 10px solid transparent;
-            border-top-color: #333;
-        }
-        .tooltip.visible {
-            opacity: 1;
-        }
-
-        circle { transition: r 0.3s, filter 0.3s; }
-        circle:hover {
-            r: 16;
-            filter: brightness(1.5);
-            cursor: pointer;
-        }
+        .tooltip.visible { opacity: 1; transform: translateY(0); }
+        circle { transition: r 0.2s, filter 0.2s; }
+        circle:hover { r: 16; filter: brightness(1.4); cursor: pointer; }
+        button { background:#3b82f6; color:white; padding:12px 30px; border:none; border-radius:8px; cursor:pointer; font-size:1.1rem; margin:10px 5px; }
+        button:hover { background:#1e40af; }
+        #result, #taskResult { margin-top:20px; font-weight:bold; font-size:1.2rem; }
     </style>
 </head>
 <body>
     <header>
         <h1>Рационални числа 🚀</h1>
-        <p>Забавно и лесно за 7. клас!</p>
+        <p>Забавно и лесно за 7. клас – с игри и видеа!</p>
     </header>
+    <nav>
+        <a href="#ос">Числова ос</a>
+        <a href="#задачи">Задачи</a>
+        <a href="#видео">Видео</a>
+        <a href="#тест">Тест</a>
+    </nav>
 
     <div class="container">
-        <div class="section">
+        <div class="section" id="ос">
             <h2>Числова ос – задръж мишката върху цветните кръгчета!</h2>
-            <p>Виж кое рационално число е на всяка точка – балончето излиза точно над нея! 😊</p>
-
-            <div style="position: relative;">
-                <!-- Tooltip елементът -->
+            <p>Опитай сега – като задържиш мишката върху всяко цветно кръгче, ще видиш кое число е там!</p>
+            <div style="position:relative;">
                 <div class="tooltip" id="tooltip"></div>
+                <svg width="100%" height="250" viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg" style="max-width:800px; background:#fff; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); margin:20px auto; display:block;">
+                    <line x1="50" y1="150" x2="750" y2="150" stroke="#000" stroke-width="5"/>
+                    <polygon points="750,150 740,140 740,160" fill="#000"/>
+                    <polygon points="50,150 60,140 60,160" fill="#000"/>
+                    <line x1="100" y1="140" x2="100" y2="160" stroke="#000" stroke-width="3"/><text x="100" y="180" text-anchor="middle" font-size="20">-4</text>
+                    <line x1="200" y1="140" x2="200" y2="160" stroke="#000" stroke-width="3"/><text x="200" y="180" text-anchor="middle" font-size="20">-3</text>
+                    <line x1="300" y1="140" x2="300" y2="160" stroke="#000" stroke-width="3"/><text x="300" y="180" text-anchor="middle" font-size="20">-2</text>
+                    <line x1="400" y1="140" x2="400" y2="160" stroke="#000" stroke-width="3"/><text x="400" y="180" text-anchor="middle" font-size="20">-1</text>
+                    <line x1="500" y1="135" x2="500" y2="165" stroke="#000" stroke-width="5"/><text x="500" y="180" text-anchor="middle" font-size="20" font-weight="bold">0</text>
+                    <line x1="600" y1="140" x2="600" y2="160" stroke="#000" stroke-width="3"/><text x="600" y="180" text-anchor="middle" font-size="20">1</text>
+                    <line x1="700" y1="140" x2="700" y2="160" stroke="#000" stroke-width="3"/><text x="700" y="180" text-anchor="middle" font-size="20">2</text>
 
-                <!-- Числовата ос -->
-                <svg width="100%" height="300" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" style="max-width:800px; background:#fff; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); margin:20px auto; display:block;">
-                    <line x1="50" y1="180" x2="750" y2="180" stroke="#000" stroke-width="5"/>
-                    <polygon points="750,180 740,170 740,190" fill="#000"/>
-                    <polygon points="50,180 60,170 60,190" fill="#000"/>
-
-                    <!-- Маркировки за цели числа -->
-                    <line x1="100" y1="170" x2="100" y2="190" stroke="#000" stroke-width="3"/><text x="100" y="210" text-anchor="middle" font-size="20">-4</text>
-                    <line x1="200" y1="170" x2="200" y2="190" stroke="#000" stroke-width="3"/><text x="200" y="210" text-anchor="middle" font-size="20">-3</text>
-                    <line x1="300" y1="170" x2="300" y2="190" stroke="#000" stroke-width="3"/><text x="300" y="210" text-anchor="middle" font-size="20">-2</text>
-                    <line x1="400" y1="170" x2="400" y2="190" stroke="#000" stroke-width="3"/><text x="400" y="210" text-anchor="middle" font-size="20">-1</text>
-                    <line x1="500" y1="165" x2="500" y2="195" stroke="#000" stroke-width="5"/><text x="500" y="210" text-anchor="middle" font-size="24" font-weight="bold">0</text>
-                    <line x1="600" y1="170" x2="600" y2="190" stroke="#000" stroke-width="3"/><text x="600" y="210" text-anchor="middle" font-size="20">1</text>
-                    <line x1="700" y1="170" x2="700" y2="190" stroke="#000" stroke-width="3"/><text x="700" y="210" text-anchor="middle" font-size="20">2</text>
-
-                    <!-- Цветните точки с уникални id-та -->
-                    <circle id="p1" cx="250" cy="180" r="12" fill="#e91e63" data-value="-5/2"/>
-                    <circle id="p2" cx="350" cy="180" r="12" fill="#ff9800" data-value="-3/2"/>
-                    <circle id="p3" cx="450" cy="180" r="12" fill="#4caf50" data-value="-1/2"/>
-                    <circle id="p4" cx="550" cy="180" r="12" fill="#2196f3" data-value="1/2"/>
-                    <circle id="p5" cx="650" cy="180" r="12" fill="#9c27b0" data-value="3/2"/>
+                    <!-- Цветните кръгчета с id-та -->
+                    <circle id="point1" cx="250" cy="150" r="12" fill="#e91e63" data-value="-5/2"/>
+                    <circle id="point2" cx="350" cy="150" r="12" fill="#ff9800" data-value="-3/2"/>
+                    <circle id="point3" cx="450" cy="150" r="12" fill="#4caf50" data-value="-1/2"/>
+                    <circle id="point4" cx="550" cy="150" r="12" fill="#2196f3" data-value="1/2"/>
+                    <circle id="point5" cx="650" cy="150" r="12" fill="#9c27b0" data-value="3/2"/>
                 </svg>
             </div>
         </div>
+
+        <!-- Останалата част от страницата (тест, задачи, видео) може да я оставиш както е -->
+        <!-- Ако искаш само да тестваш tooltip-а, може да изтриеш всичко след </div> по-горе -->
+
     </div>
 
     <script>
         const tooltip = document.getElementById('tooltip');
 
+        // Масив с всички кръгчета
         const points = [
-            { id: 'p1', value: '-5/2', cx: 250 },
-            { id: 'p2', value: '-3/2', cx: 350 },
-            { id: 'p3', value: '-1/2', cx: 450 },
-            { id: 'p4', value: '1/2',   cx: 550 },
-            { id: 'p5', value: '3/2',   cx: 650 }
+            { id: 'point1', value: '-5/2' },
+            { id: 'point2', value: '-3/2' },
+            { id: 'point3', value: '-1/2' },
+            { id: 'point4', value: '1/2' },
+            { id: 'point5', value: '3/2' }
         ];
 
         points.forEach(point => {
             const circle = document.getElementById(point.id);
+            if (circle) {
+                circle.addEventListener('mouseenter', function(e) {
+                    tooltip.textContent = point.value;
+                    tooltip.classList.add('visible');
+                    tooltip.style.left = (e.pageX + 15) + 'px';
+                    tooltip.style.top = (e.pageY - 50) + 'px';
+                });
 
-            circle.addEventListener('mouseenter', function() {
-                tooltip.textContent = point.value;
-                tooltip.classList.add('visible');
+                circle.addEventListener('mousemove', function(e) {
+                    tooltip.style.left = (e.pageX + 15) + 'px';
+                    tooltip.style.top = (e.pageY - 50) + 'px';
+                });
 
-                // Позициониране точно над точката (в средата)
-                const svg = circle.ownerSVGElement;
-                const pt = svg.createSVGPoint();
-                pt.x = point.cx;
-                pt.y = 180 - 40; // малко над оста
-
-                const svgRect = svg.getBoundingClientRect();
-                const screenPt = pt.matrixTransform(svg.getScreenCTM());
-
-                tooltip.style.left = (screenPt.x - tooltip.offsetWidth / 2) + 'px';
-                tooltip.style.top = (screenPt.y - tooltip.offsetHeight - 15) + 'px'; // 15px разстояние + стрелка
-            });
-
-            circle.addEventListener('mouseleave', function() {
-                tooltip.classList.remove('visible');
-            });
+                circle.addEventListener('mouseleave', function() {
+                    tooltip.classList.remove('visible');
+                });
+            }
         });
     </script>
 </body>
