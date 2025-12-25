@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Рационални числа – пълно обяснение, примери и задачи за 7. клас по програмата на МОН">
     <title>Рационални числа – Математика 7. клас</title>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin:0; padding:0; background:#f0f9ff; color:#333; line-height:1.6; }
@@ -18,106 +19,264 @@
         .frac { display:inline-block; vertical-align:middle; text-align:center; font-size:1.2em; }
         .frac > sup { display:block; font-size:0.7em; line-height:1; }
         .frac > sub { display:block; font-size:0.7em; line-height:1; border-top:1px solid #000; padding-top:2px; }
+        .interactive, .test { background:#f8fafc; padding:20px; border-radius:12px; margin-top:20px; }
+        button { background:#3b82f6; color:white; padding:12px 30px; border:none; border-radius:8px; cursor:pointer; font-size:1.1rem; margin:10px 5px; }
+        button:hover { background:#1e40af; }
+        #result, #taskResult { margin-top:20px; font-weight:bold; font-size:1.2rem; }
+        .video-container { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); margin:20px 0; }
+        .video-container iframe { position:absolute; top:0; left:0; width:100%; height:100%; }
+        #sliderValue { font-size:1.5rem; font-weight:bold; color:#3b82f6; text-align:center; margin:20px 0; }
+
+        /* Tooltip – точно над точката */
         .tooltip {
             position: absolute;
             background: #333;
             color: white;
-            padding: 10px 14px;
-            border-radius: 8px;
-            font-size: 18px;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-size: 20px;
             font-weight: bold;
             pointer-events: none;
             opacity: 0;
-            transition: opacity 0.3s, transform 0.2s;
-            transform: translateY(10px);
+            transition: opacity 0.3s;
             z-index: 1000;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+            white-space: nowrap;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
         }
-        .tooltip.visible { opacity: 1; transform: translateY(0); }
-        circle { transition: r 0.2s, filter 0.2s; }
-        circle:hover { r: 16; filter: brightness(1.4); cursor: pointer; }
-        button { background:#3b82f6; color:white; padding:12px 30px; border:none; border-radius:8px; cursor:pointer; font-size:1.1rem; margin:10px 5px; }
-        button:hover { background:#1e40af; }
-        #result, #taskResult { margin-top:20px; font-weight:bold; font-size:1.2rem; }
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -10px;
+            border: 10px solid transparent;
+            border-top-color: #333;
+        }
+        .tooltip.visible { opacity: 1; }
+
+        circle { transition: all 0.3s; }
+        circle:hover { r:16; filter: brightness(1.5); cursor:pointer; }
     </style>
 </head>
 <body>
     <header>
         <h1>Рационални числа 🚀</h1>
-        <p>Забавно и лесно за 7. клас – с игри и видеа!</p>
+        <p>Забавно и лесно обяснение за 7. клас – с игри, задачи и видеа!</p>
     </header>
     <nav>
+        <a href="#начало">Начало</a>
+        <a href="#обяснение">Какво са?</a>
         <a href="#ос">Числова ос</a>
-        <a href="#задачи">Задачи</a>
+        <a href="#задачи">Случайна задача</a>
+        <a href="#действия">Действия</a>
         <a href="#видео">Видео</a>
         <a href="#тест">Тест</a>
     </nav>
 
-    <div class="container">
+    <div class="container" id="начало">
+        <div class="section" id="обяснение">
+            <h2>Какво са рационални числа? 😎</h2>
+            <p>Рационалните числа (ℚ) са всички числа, които могат да се представят като дроб <span class="frac"><sup>p</sup><sub>q</sub></span>, където <strong>p</strong> е цяло число, а <strong>q</strong> е естествено число, различно от нула.</p>
+            <p>Към тях спадат: цели числа, обикновени дроби, крайни и периодични десетични дроби.</p>
+            <p><strong>Не са рационални:</strong> π, √2 и други безкрайни непериодични десетични дроби.</p>
+            <div class="example">
+                <strong>Примери:</strong><br>
+                5 = <span class="frac"><sup>5</sup><sub>1</sub></span>, &nbsp; -3 = <span class="frac"><sup>-3</sup><sub>1</sub></span>, &nbsp; 0.75 = <span class="frac"><sup>3</sup><sub>4</sub></span>, &nbsp; 0.3̅ = <span class="frac"><sup>1</sup><sub>3</sub></span>
+            </div>
+        </div>
+
         <div class="section" id="ос">
-            <h2>Числова ос – задръж мишката върху цветните кръгчета!</h2>
-            <p>Опитай сега – като задържиш мишката върху всяко цветно кръгче, ще видиш кое число е там!</p>
+            <h2>Интерактивна числова ос 🎯</h2>
+            <div class="interactive">
+                <label for="numberSlider">Плъзни, за да поставиш число от -5 до 5:</label><br>
+                <input type="range" id="numberSlider" min="-50" max="50" value="0" step="1">
+                <div id="sliderValue">0</div>
+                <svg id="interactiveAxis" width="100%" height="200" viewBox="0 0 800 200" style="max-width:800px; background:#fff; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); margin:20px auto; display:block;">
+                    <line x1="50" y1="100" x2="750" y2="100" stroke="#333" stroke-width="4"/>
+                    <polygon points="750,100 740,90 740,110" fill="#333"/>
+                    <polygon points="50,100 60,90 60,110" fill="#333"/>
+                    <line x1="150" y1="90" x2="150" y2="110" stroke="#333" stroke-width="3"/><text x="150" y="130" text-anchor="middle" font-size="18">-4</text>
+                    <line x1="250" y1="90" x2="250" y2="110" stroke="#333" stroke-width="3"/><text x="250" y="130" text-anchor="middle" font-size="18">-3</text>
+                    <line x1="350" y1="90" x2="350" y2="110" stroke="#333" stroke-width="3"/><text x="350" y="130" text-anchor="middle" font-size="18">-2</text>
+                    <line x1="450" y1="90" x2="450" y2="110" stroke="#333" stroke-width="3"/><text x="450" y="130" text-anchor="middle" font-size="18">-1</text>
+                    <line x1="550" y1="85" x2="550" y2="115" stroke="#333" stroke-width="4"/><text x="550" y="130" text-anchor="middle" font-size="24" font-weight="bold">0</text>
+                    <line x1="650" y1="90" x2="650" y2="110" stroke="#333" stroke-width="3"/><text x="650" y="130" text-anchor="middle" font-size="18">1</text>
+                    <line x1="750" y1="90" x2="750" y2="110" stroke="#333" stroke-width="3"/><text x="750" y="130" text-anchor="middle" font-size="18">2</text>
+                    <circle id="movingPoint" cx="550" cy="100" r="12" fill="#e91e63"/>
+                </svg>
+            </div>
+
+            <h2>Числова ос с примери (задръж мишката върху кръгчетата!)</h2>
             <div style="position:relative;">
                 <div class="tooltip" id="tooltip"></div>
-                <svg width="100%" height="250" viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg" style="max-width:800px; background:#fff; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); margin:20px auto; display:block;">
-                    <line x1="50" y1="150" x2="750" y2="150" stroke="#000" stroke-width="5"/>
-                    <polygon points="750,150 740,140 740,160" fill="#000"/>
-                    <polygon points="50,150 60,140 60,160" fill="#000"/>
-                    <line x1="100" y1="140" x2="100" y2="160" stroke="#000" stroke-width="3"/><text x="100" y="180" text-anchor="middle" font-size="20">-4</text>
-                    <line x1="200" y1="140" x2="200" y2="160" stroke="#000" stroke-width="3"/><text x="200" y="180" text-anchor="middle" font-size="20">-3</text>
-                    <line x1="300" y1="140" x2="300" y2="160" stroke="#000" stroke-width="3"/><text x="300" y="180" text-anchor="middle" font-size="20">-2</text>
-                    <line x1="400" y1="140" x2="400" y2="160" stroke="#000" stroke-width="3"/><text x="400" y="180" text-anchor="middle" font-size="20">-1</text>
-                    <line x1="500" y1="135" x2="500" y2="165" stroke="#000" stroke-width="5"/><text x="500" y="180" text-anchor="middle" font-size="20" font-weight="bold">0</text>
-                    <line x1="600" y1="140" x2="600" y2="160" stroke="#000" stroke-width="3"/><text x="600" y="180" text-anchor="middle" font-size="20">1</text>
-                    <line x1="700" y1="140" x2="700" y2="160" stroke="#000" stroke-width="3"/><text x="700" y="180" text-anchor="middle" font-size="20">2</text>
+                <svg width="100%" height="300" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" style="max-width:800px; background:#fff; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); margin:20px auto; display:block;">
+                    <line x1="50" y1="180" x2="750" y2="180" stroke="#000" stroke-width="5"/>
+                    <polygon points="750,180 740,170 740,190" fill="#000"/>
+                    <polygon points="50,180 60,170 60,190" fill="#000"/>
+                    <line x1="100" y1="170" x2="100" y2="190" stroke="#000" stroke-width="3"/><text x="100" y="210" text-anchor="middle" font-size="20">-4</text>
+                    <line x1="200" y1="170" x2="200" y2="190" stroke="#000" stroke-width="3"/><text x="200" y="210" text-anchor="middle" font-size="20">-3</text>
+                    <line x1="300" y1="170" x2="300" y2="190" stroke="#000" stroke-width="3"/><text x="300" y="210" text-anchor="middle" font-size="20">-2</text>
+                    <line x1="400" y1="170" x2="400" y2="190" stroke="#000" stroke-width="3"/><text x="400" y="210" text-anchor="middle" font-size="20">-1</text>
+                    <line x1="500" y1="165" x2="500" y2="195" stroke="#000" stroke-width="5"/><text x="500" y="210" text-anchor="middle" font-size="24" font-weight="bold">0</text>
+                    <line x1="600" y1="170" x2="600" y2="190" stroke="#000" stroke-width="3"/><text x="600" y="210" text-anchor="middle" font-size="20">1</text>
+                    <line x1="700" y1="170" x2="700" y2="190" stroke="#000" stroke-width="3"/><text x="700" y="210" text-anchor="middle" font-size="20">2</text>
 
-                    <!-- Цветните кръгчета с id-та -->
-                    <circle id="point1" cx="250" cy="150" r="12" fill="#e91e63" data-value="-5/2"/>
-                    <circle id="point2" cx="350" cy="150" r="12" fill="#ff9800" data-value="-3/2"/>
-                    <circle id="point3" cx="450" cy="150" r="12" fill="#4caf50" data-value="-1/2"/>
-                    <circle id="point4" cx="550" cy="150" r="12" fill="#2196f3" data-value="1/2"/>
-                    <circle id="point5" cx="650" cy="150" r="12" fill="#9c27b0" data-value="3/2"/>
+                    <circle id="p1" cx="250" cy="180" r="12" fill="#e91e63"/>
+                    <circle id="p2" cx="350" cy="180" r="12" fill="#ff9800"/>
+                    <circle id="p3" cx="450" cy="180" r="12" fill="#4caf50"/>
+                    <circle id="p4" cx="550" cy="180" r="12" fill="#2196f3"/>
+                    <circle id="p5" cx="650" cy="180" r="12" fill="#9c27b0"/>
                 </svg>
             </div>
         </div>
 
-        <!-- Останалата част от страницата (тест, задачи, видео) може да я оставиш както е -->
-        <!-- Ако искаш само да тестваш tooltip-а, може да изтриеш всичко след </div> по-горе -->
+        <div class="section" id="задачи">
+            <h2>Случайна задача – опитай сега! 🎲</h2>
+            <div class="interactive">
+                <button onclick="generateTask()">Нова задача</button>
+                <div id="randomTask">Натисни бутона за първа задача!</div>
+                <input type="text" id="taskAnswer" placeholder="Твоят отговор">
+                <button onclick="checkTask()">Провери</button>
+                <div id="taskResult"></div>
+            </div>
+        </div>
 
+        <div class="section" id="действия">
+            <h2>Действия с рационални числа</h2>
+            <p>Правилата са същите като за обикновените дроби.</p>
+            <div class="example">
+                <strong>Събиране:</strong> -4 + 1.5 = -2.5<br>
+                <strong>Изваждане с различни знаменатели:</strong><br>
+                <span class="frac"><sup>-5</sup><sub>6</sub></span> + <span class="frac"><sup>1</sup><sub>4</sub></span> = <span class="frac"><sup>-7</sup><sub>12</sub></span><br><br>
+                <strong>Умножение:</strong> (-3) × <span class="frac"><sup>2</sup><sub>5</sub></span> = <span class="frac"><sup>-6</sup><sub>5</sub></span><br><br>
+                <strong>Деление:</strong> -8 ÷ 2 = -4
+            </div>
+        </div>
+
+        <div class="section" id="видео">
+            <h2>Кратко видео обяснение 📹</h2>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/OASlJkdhh3E" title="Рационални и ирационални числа" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="section" id="тест">
+            <h2>Интерактивен тест – колко точки ще събереш? 🏆</h2>
+            <div class="test">
+                <div class="question">1. Кое от следните НЕ е рационално число?<br>
+                    <input type="radio" name="q1" value="wrong"> -5<br>
+                    <input type="radio" name="q1" value="correct"> π (числото пи)<br>
+                    <input type="radio" name="q1" value="wrong"> 0.25
+                </div>
+                <div class="question">2. |-7| = ?<br><input type="text" id="q2"></div>
+                <div class="question">3. -2.5 + 5 = ?<br><input type="text" id="q3"></div>
+                <div class="question">4. (-4) × (-1/2) = ?<br><input type="text" id="q4"></div>
+                <div class="question">5. Кое е по-голямо: -3/2 или -1?<br>
+                    <input type="radio" name="q5" value="wrong"> -3/2<br>
+                    <input type="radio" name="q5" value="correct"> -1
+                </div>
+                <div class="question">6. 0.8 = ? като обикновена дроб<br><input type="text" id="q6" placeholder="напр. 4/5"></div>
+                <div class="question">7. -6 ÷ 3 = ?<br><input type="text" id="q7"></div>
+                <div class="question">8. Кое число е по-малко: -4.2 или -4?<br>
+                    <input type="radio" name="q8" value="correct"> -4.2<br>
+                    <input type="radio" name="q8" value="wrong"> -4
+                </div>
+                <button onclick="checkTest()">Провери отговорите</button>
+                <div id="result"></div>
+            </div>
+        </div>
     </div>
 
-    <script>
-        const tooltip = document.getElementById('tooltip');
+    <footer>
+        <p>&copy; 2025 Математика 7. клас – За български ученици с ❤ и много забавление!</p>
+    </footer>
 
-        // Масив с всички кръгчета
+    <script>
+        // Плъзгач
+        const slider = document.getElementById('numberSlider');
+        const sliderValue = document.getElementById('sliderValue');
+        const movingPoint = document.getElementById('movingPoint');
+        slider.oninput = function() {
+            let val = this.value / 10;
+            sliderValue.textContent = val % 1 === 0 ? val.toFixed(1) : val;
+            let x = 550 + val * 100;
+            movingPoint.setAttribute('cx', Math.max(50, Math.min(750, x)));
+        };
+
+        // Tooltip над точките
+        const tooltip = document.getElementById('tooltip');
         const points = [
-            { id: 'point1', value: '-5/2' },
-            { id: 'point2', value: '-3/2' },
-            { id: 'point3', value: '-1/2' },
-            { id: 'point4', value: '1/2' },
-            { id: 'point5', value: '3/2' }
+            { id: 'p1', value: '-5/2', cx: 250 },
+            { id: 'p2', value: '-3/2', cx: 350 },
+            { id: 'p3', value: '-1/2', cx: 450 },
+            { id: 'p4', value: '1/2',   cx: 550 },
+            { id: 'p5', value: '3/2',   cx: 650 }
         ];
 
-        points.forEach(point => {
-            const circle = document.getElementById(point.id);
-            if (circle) {
-                circle.addEventListener('mouseenter', function(e) {
-                    tooltip.textContent = point.value;
-                    tooltip.classList.add('visible');
-                    tooltip.style.left = (e.pageX + 15) + 'px';
-                    tooltip.style.top = (e.pageY - 50) + 'px';
-                });
+        points.forEach(p => {
+            const circle = document.getElementById(p.id);
+            circle.addEventListener('mouseenter', () => {
+                tooltip.textContent = p.value;
+                tooltip.classList.add('visible');
 
-                circle.addEventListener('mousemove', function(e) {
-                    tooltip.style.left = (e.pageX + 15) + 'px';
-                    tooltip.style.top = (e.pageY - 50) + 'px';
-                });
+                const svg = circle.ownerSVGElement;
+                const pt = svg.createSVGPoint();
+                pt.x = p.cx;
+                pt.y = 180 - 40;
 
-                circle.addEventListener('mouseleave', function() {
-                    tooltip.classList.remove('visible');
-                });
-            }
+                const screenPt = pt.matrixTransform(svg.getScreenCTM());
+                tooltip.style.left = (screenPt.x - tooltip.offsetWidth / 2) + 'px';
+                tooltip.style.top = (screenPt.y - tooltip.offsetHeight - 15) + 'px';
+            });
+            circle.addEventListener('mouseleave', () => tooltip.classList.remove('visible'));
         });
+
+        // Случайни задачи
+        const tasks = [
+            { q: "Кое е по-голямо: -2.3 или -1.8?", a: "-1.8" },
+            { q: "|-9| = ?", a: "9" },
+            { q: "-5 + 8.5 = ?", a: "3.5" },
+            { q: "(-3) × (-2/3) = ?", a: "2" },
+            { q: "-7/2 е между кои цели числа?", a: "-4 и -3" },
+            { q: "Кое е по-малко: -5/6 или -0.8?", a: "-5/6" },
+            { q: "3.25 като дроб = ?", a: "13/4" }
+        ];
+        let currentTask = null;
+        function generateTask() {
+            currentTask = tasks[Math.floor(Math.random() * tasks.length)];
+            document.getElementById('randomTask').textContent = currentTask.q;
+            document.getElementById('taskAnswer').value = '';
+            document.getElementById('taskResult').textContent = '';
+        }
+        function checkTask() {
+            if (!currentTask) return;
+            let ans = document.getElementById('taskAnswer').value.trim();
+            if (ans.toLowerCase() === currentTask.a.toLowerCase()) {
+                document.getElementById('taskResult').innerHTML = "Браво! Правилно! 🎉";
+            } else {
+                document.getElementById('taskResult').innerHTML = `Още малко! Отговорът е: <strong>${currentTask.a}</strong> 😊`;
+            }
+        }
+
+        // Тест
+        function checkTest() {
+            let score = 0;
+            if (document.querySelector('input[name="q1"]:checked')?.value === "correct") score++;
+            if (document.getElementById('q2').value.trim() === "7") score++;
+            if (["2.5", "2,5"].includes(document.getElementById('q3').value.trim())) score++;
+            if (["2", "2.0", "2,0"].includes(document.getElementById('q4').value.trim())) score++;
+            if (document.querySelector('input[name="q5"]:checked')?.value === "correct") score++;
+            let q6 = document.getElementById('q6').value.trim().toLowerCase().replace(',', '.');
+            if (["4/5", "8/10", "0.8", "0,8"].includes(q6)) score++;
+            if (document.getElementById('q7').value.trim() === "-2") score++;
+            if (document.querySelector('input[name="q8"]:checked')?.value === "correct") score++;
+
+            let message = score === 8 ? "Отлично! Перфектно! 🌟" :
+                          score >= 6 ? "Много добре! 👏" :
+                          score >= 4 ? "Добър опит! 💪" : "Не се отказвай! 😊";
+
+            document.getElementById('result').innerHTML = `Точки: ${score}/8<br>${message}<br>Продължавай да упражняваш! ✨`;
+        }
     </script>
 </body>
 </html>
