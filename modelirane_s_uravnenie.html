@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Моделиране с линейни уравнения</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+        h1, h2, h3 { color: #333; }
+        .zadacha { background: #f9f9f9; padding: 15px; margin: 30px 0; border-left: 5px solid #007bff; }
+        table { border-collapse: collapse; width: 100%; margin: 15px 0; }
+        table, th, td { border: 1px solid #999; padding: 10px; text-align: center; }
+        th { background-color: #e7f0ff; }
+        .show-btn { cursor: pointer; color: #007bff; font-weight: bold; margin-top: 10px; display: inline-block; }
+        .reshenie { display: none; margin-top: 15px; padding: 15px; background: #fff; border: 1px solid #ddd; border-radius: 5px; }
+        .otgovor { font-weight: bold; color: #d9534f; margin-top: 15px; font-size: 1.1em; }
+    </style>
+    <script>
+        function toggleReshenie(id) {
+            var el = document.getElementById(id);
+            if (el.style.display === "block") {
+                el.style.display = "none";
+            } else {
+                el.style.display = "block";
+            }
+        }
+    </script>
+</head>
+<body>
+
+<h1>Моделиране на текстови задачи с линейни уравнения</h1>
+<p>Всички задачи са решени с използване на само едно неизвестно x. Кликни върху бутона, за да видиш решението.</p>
+
+<h2>1. Текстови задачи от общ характер</h2>
+
+<div class="zadacha">
+    <h3>Задача 1: Числа и цифри</h3>
+    <p>Цифрата на десетиците на едно двуцифрено число е с 2 по-голяма от цифрата на единиците. Сборът на цифрите е една седма от числото. Намерете числото.</p>
+    <div class="show-btn" onclick="toggleReshenie('resh1')">▶ Покажи/Скрий решението</div>
+    <div id="resh1" class="reshenie">
+        <p>Нека цифрата на единиците е <strong>x</strong>.<br>
+        Тогава цифрата на десетиците е <strong>x + 2</strong>.</p>
+        <p>Числото: 10(x + 2) + x = 11x + 20</p>
+        <p>Сборът на цифрите: x + (x + 2) = 2x + 2</p>
+        <p><strong>Уравнение:</strong> 2x + 2 = (11x + 20)/7</p>
+        <p>14x + 14 = 11x + 20 → 3x = 6 → x = 2</p>
+        <div class="otgovor">Числото е 42.</div>
+    </div>
+</div>
+
+<div class="zadacha">
+    <h3>Задача 2: Сбор и разлика на две числа</h3>
+    <p>Сборът на две числа е 85, а разликата им е 23. Намерете числата.</p>
+    <div class="show-btn" onclick="toggleReshenie('resh2')">▶ Покажи/Скрий решението</div>
+    <div id="resh2" class="reshenie">
+        <p>Нека по-малкото число е <strong>x</strong>.<br>
+        Тогава по-голямото е <strong>x + 23</strong>.</p>
+        <p><strong>Уравнение:</strong> x + (x + 23) = 85</p>
+        <p>2x + 23 = 85 → 2x = 62 → x = 31</p>
+        <div class="otgovor">Числата са 31 и 54.</div>
+    </div>
+</div>
+
+<div class="zadacha">
+    <h3>Задача 3: Част от едно число равно на част от друго</h3>
+    <p>Едно число е 3 пъти по-голямо от друго. Ако към по-малкото прибавим 20, то ще стане равно на половината от по-голямото. Намерете числата.</p>
+    <div class="show-btn" onclick="toggleReshenie('resh3')">▶ Покажи/Скрий решението</div>
+    <div id="resh3" class="reshenie">
+        <p>Нека по-малкото число е <strong>x</strong>.<br>
+        Тогава по-голямото е <strong>3x</strong>.</p>
+        <p><strong>Уравнение:</strong> x + 20 = (3x)/2</p>
+        <p>2x + 40 = 3x → 40 = x</p>
+        <div class="otgovor">Числата са 40 и 120.</div>
+    </div>
+</div>
+
+<div class="zadacha">
+    <h3>Задача 4: Пазар – покупка на два вида стоки</h3>
+    <p>В магазин едни ябълки струват 2,40 лв./кг, а други – 3,60 лв./кг. Купени са общо 15 кг ябълки от двата вида и е платено 45 лв. Колко килограма са купени от всеки вид?</p>
+    <div class="show-btn" onclick="toggleReshenie('resh4')">▶ Покажи/Скрий решението</div>
+    <div id="resh4" class="reshenie">
+        <table>
+            <tr><th>Вид ябълки</th><th>Количество (кг)</th><th>Цена (лв./кг)</th><th>Стойност (лв.)</th></tr>
+            <tr><td>По-евтини</td><td>x</td><td>2,40</td><td>2,40x</td></tr>
+            <tr><td>По-скъпи</td><td>15 – x</td><td>3,60</td><td>3,60(15 – x)</td></tr>
+            <tr><td>Общо</td><td>15</td><td>—</td><td>45</td></tr>
+        </table>
+        <p><strong>Уравнение:</strong> 2,40x + 3,60(15 – x) = 45</p>
+        <p>2,40x + 54 – 3,60x = 45 → –1,20x = –9 → x = 7,5</p>
+        <div class="otgovor">От по-евтините: 7,5 кг<br>От по-скъпите: 7,5 кг</div>
+    </div>
+</div>
+
+<div class="zadacha">
+    <h3>Задача 5: Движение по суша (насрещно)</h3>
+    <p>Двама пешеходци тръгват едновременно насреща един на друг от два града, отдалечени на 30 км, и се срещат след 4 часа. Първият върви с 4 км/ч. С каква скорост върви вторият?</p>
+    <div class="show-btn" onclick="toggleReshenie('resh5')">▶ Покажи/Скрий решението</div>
+    <div id="resh5" class="reshenie">
+        <table>
+            <tr><th>Пешеходец</th><th>V (скорост, км/ч)</th><th>t (време, ч)</th><th>S (път, км)</th></tr>
+            <tr><td>Първи</td><td>4</td><td>4</td><td>16</td></tr>
+            <tr><td>Втори</td><td>x</td><td>4</td><td>4x</td></tr>
+            <tr><td>Общо</td><td>—</td><td>—</td><td>30</td></tr>
+        </table>
+        <p><strong>Уравнение:</strong> 16 + 4x = 30 → 4x = 14 → x = 3,5</p>
+        <div class="otgovor">Скоростта на втория пешеходец е 3,5 км/ч.</div>
+    </div>
+</div>
+
+<div class="zadacha">
+    <h3>Задача 6: Движение по вода</h3>
+    <p>Лодка изминава едно и също разстояние по течение за 3 часа, а срещу течение – за 5 часа. Скоростта на течението е 2 км/ч. Намерете собствената скорост на лодката.</p>
+    <div class="show-btn" onclick="toggleReshenie('resh6')">▶ Покажи/Скрий решението</div>
+    <div id="resh6" class="reshenie">
+        <table>
+            <tr><th>Условие</th><th>V (скорост, км/ч)</th><th>t (време, ч)</th><th>S (път, км)</th></tr>
+            <tr><td>По течение</td><td>x + 2</td><td>3</td><td>3(x + 2)</td></tr>
+            <tr><td>Срещу течение</td><td>x – 2</td><td>5</td><td>5(x – 2)</td></tr>
+        </table>
+        <p><strong>Уравнение:</strong> 3(x + 2) = 5(x – 2)</p>
+        <p>3x + 6 = 5x – 10 → 16 = 2x → x = 8</p>
+        <div class="otgovor">Собствената скорост на лодката е 8 км/ч.</div>
+    </div>
+</div>
+
+<div class="zadacha">
+    <h3>Задача 7: Работа заедно</h3>
+    <p>Първият работник може да свърши една работа сам за 6 дни, а вторият – за 12 дни. Ако работят заедно, за колко дни ще свършат същата работа?</p>
+    <div class="show-btn" onclick="toggleReshenie('resh7')">▶ Покажи/Скрий решението</div>
+    <div id="resh7" class="reshenie">
+        <table>
+            <tr><th>Работник</th><th>Сам (дни)</th><th>N (норма, част/ден)</th><th>t (време, дни)</th><th>A (работа)</th></tr>
+            <tr><td>Първи</td><td>6</td><td>1/6</td><td>x</td><td>(1/6) × x</td></tr>
+            <tr><td>Втори</td><td>12</td><td>1/12</td><td>x</td><td>(1/12) × x</td></tr>
+        </table>
+        <p>Заедно свършват: (1/6 + 1/12) × x = 1</p>
+        <p><strong>Уравнение:</strong> (1/4) × x = 1 → x = 4</p>
+        <div class="otgovor">Заедно ще свършат работата за 4 дни.</div>
+    </div>
+</div>
+
+<div class="zadacha">
+    <h3>Задача 8: Работа с промяна</h3>
+    <p>Един работник може да свърши една работа сам за 15 дни. Той работи сам 5 дни, след което към него се присъединява втори работник, който сам би свършил същата работа за 10 дни. За колко дни двамата ще свършат останалата част от работата?</p>
+    <div class="show-btn" onclick="toggleReshenie('resh8')">▶ Покажи/Скрий решението</div>
+    <div id="resh8" class="reshenie">
+        <table>
+            <tr><th>Описание</th><th>Сам (дни)</th><th>N (норма, част/ден)</th><th>t (време, дни)</th><th>A (работа)</th></tr>
+            <tr><td>Първи сам</td><td>15</td><td>1/15</td><td>5</td><td>5 × 1/15 = 1/3</td></tr>
+            <tr><td>Първи заедно</td><td>—</td><td>1/15</td><td>x</td><td>(1/15) × x</td></tr>
+            <tr><td>Втори заедно</td><td>10</td><td>1/10</td><td>x</td><td>(1/10) × x</td></tr>
+        </table>
+        <p>Остава 1 – 1/3 = 2/3 от работата.</p>
+        <p>Заедно свършват за x дни: (1/15 + 1/10) × x = 2/3</p>
+        <p><strong>Уравнение:</strong> (1/6) × x = 2/3 → x = 4</p>
+        <div class="otgovor">Останалата част ще бъде свършена за 4 дни.</div>
+    </div>
+</div>
+
+<p><a href="index.html">Обратно към началото</a></p>
+
+</body>
+</html>
