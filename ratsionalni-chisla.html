@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Рационални числа – пълно обяснение, примери и задачи за 7. клас по програмата на МОН">
     <title>Рационални числа – Математика 7. клас</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
+
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin:0; padding:0; background:#f0f9ff; color:#333; line-height:1.6; }
         header { background:linear-gradient(135deg, #1e40af, #3b82f6); color:white; text-align:center; padding:60px 20px; }
@@ -53,6 +58,7 @@
         .tooltip.visible { opacity: 1; }
         circle { transition: all 0.3s; }
         circle:hover { r:16; filter: brightness(1.5); cursor:pointer; }
+
         .sets-diagram { text-align: center; margin: 40px 0; position: relative; }
         .sets-diagram svg { background: #f8fafc; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-width: 100%; height: auto; }
         .sets-oval { transition: all 0.4s ease; cursor: pointer; }
@@ -83,24 +89,27 @@
             <p><strong>Не са рационални:</strong> π, √2 и други безкрайни непериодични десетични дроби.</p>
             <div class="example">
                 <strong>Примери:</strong><br>
-                5 = <span class="frac"><sup>5</sup><sub>1</sub></span>, &nbsp; -3 = <span class="frac"><sup>-3</sup><sub>1</sub></span>, &nbsp; 0.75 = <span class="frac"><sup>3</sup><sub>4</sub></span>, &nbsp; 0.3̅ = <span class="frac"><sup>1</sup><sub>3</sub></span>
+                5 = <span class="frac"><sup>5</sup><sub>1</sub></span>, &nbsp; -3 = <span class="frac"><sup>-3</sup><sub>1</sub></span>, &nbsp; 0.75 = <span class="frac"><sup>3</sup><sub>4</sub></span>, &nbsp; 0.(3) = <span class="frac"><sup>1</sup><sub>3</sub></span>
             </div>
 
             <h2 style="margin-top: 50px;">Множества на числата 📊</h2>
             <div class="interactive sets-diagram">
                 <div class="sets-info" id="setsInfo">Задръж мишката върху овал за описание!</div>
-                <svg width="100%" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid meet">
-                    <ellipse class="sets-oval" id="q" cx="400" cy="400" rx="360" ry="360" fill="none" stroke="#6b21a8" stroke-width="8"/>
-                    <text x="400" y="80" font-size="48" font-weight="bold" fill="#6b21a8" text-anchor="middle">ℚ</text>
-                    <text x="400" y="740" font-size="20" fill="#6b21a8" text-anchor="middle">-2.5, -3/4, 0.75, 1/2, 0.3̅</text>
+                <svg width="100%" height="600" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid meet">
+                    <!-- Най-отзад: ℚ (виолетов) -->
+                    <ellipse class="sets-oval" id="q" cx="400" cy="300" rx="280" ry="260" fill="none" stroke="#6b21a8" stroke-width="8"/>
+                    <text x="400" y="100" font-size="42" font-weight="bold" fill="#6b21a8" text-anchor="middle">ℚ</text>
+                    <text x="400" y="520" font-size="18" fill="#6b21a8" text-anchor="middle">-2.5, -3/4, 0.75, 1/2, 0.(3)</text>
 
-                    <ellipse class="sets-oval" id="z" cx="400" cy="400" rx="260" ry="260" fill="none" stroke="#2563eb" stroke-width="8"/>
-                    <text x="400" y="200" font-size="48" font-weight="bold" fill="#2563eb" text-anchor="middle">ℤ</text>
-                    <text x="400" y="620" font-size="20" fill="#2563eb" text-anchor="middle">-10, -5, 0, 3, 15</text>
+                    <!-- Среден слой: ℤ (син) -->
+                    <ellipse class="sets-oval" id="z" cx="400" cy="300" rx="200" ry="180" fill="none" stroke="#2563eb" stroke-width="8"/>
+                    <text x="400" y="180" font-size="42" font-weight="bold" fill="#2563eb" text-anchor="middle">ℤ</text>
+                    <text x="400" y="430" font-size="18" fill="#2563eb" text-anchor="middle">-10, -5, 0, 3, 15</text>
 
-                    <ellipse class="sets-oval" id="n" cx="400" cy="400" rx="160" ry="160" fill="none" stroke="#16a34a" stroke-width="8"/>
-                    <text x="400" y="360" font-size="48" font-weight="bold" fill="#16a34a" text-anchor="middle">ℕ</text>
-                    <text x="400" y="460" font-size="20" fill="#16a34a" text-anchor="middle">1, 2, 3, 4, 5, ...</text>
+                    <!-- Най-отпред: ℕ (зелен) -->
+                    <ellipse class="sets-oval" id="n" cx="400" cy="300" rx="120" ry="110" fill="none" stroke="#16a34a" stroke-width="8"/>
+                    <text x="400" y="260" font-size="42" font-weight="bold" fill="#16a34a" text-anchor="middle">ℕ</text>
+                    <text x="400" y="340" font-size="18" fill="#16a34a" text-anchor="middle">1, 2, 3, 4, 5, ...</text>
                 </svg>
             </div>
         </div>
@@ -157,10 +166,14 @@
             <h2>Случайна задача – опитай сега! 🎲</h2>
             <div class="interactive">
                 <button onclick="generateTask()">Нова задача</button>
-                <div id="randomTask">Натисни бутона за първа задача!</div>
-                <input type="text" id="taskAnswer" placeholder="Твоят отговор">
-                <button onclick="checkTask()">Провери</button>
-                <div id="taskResult"></div>
+                <div id="randomTask" style="margin: 40px 0; font-size: 1.9rem; font-weight: 700; color: #1e40af; text-align: center; min-height: 100px; line-height: 1.4;">
+                    <!-- Задачата ще се генерира автоматично от скрипта -->
+                </div>
+                <div style="text-align: center;">
+                    <input type="text" id="taskAnswer" placeholder="Напиши отговора си тук" style="font-size: 1.4rem; padding: 15px; width: 400px; border-radius: 8px; border: 2px solid #3b82f6; text-align: center;">
+                    <button onclick="checkTask()" style="margin-left: 20px; padding: 15px 30px; font-size: 1.3rem;">Провери</button>
+                </div>
+                <div id="taskResult" style="margin-top: 30px; font-size: 1.6rem; text-align: center; min-height: 50px;"></div>
             </div>
         </div>
 
@@ -215,14 +228,14 @@
     </footer>
 
     <script>
-        // Плъзгач за интерактивната ос
+        // Плъзгач
         const slider = document.getElementById('numberSlider');
         const sliderValue = document.getElementById('sliderValue');
         const movingPoint = document.getElementById('movingPoint');
         slider.oninput = function() {
             let val = this.value / 10;
             sliderValue.textContent = val % 1 === 0 ? val.toFixed(0) : val.toFixed(1);
-            let x = 100 + (val + 5) * 60; // от 100 за -5 до 700 за 5
+            let x = 100 + (val + 5) * 60;
             movingPoint.setAttribute('cx', x);
         };
 
@@ -259,7 +272,9 @@
             { q: "(-3) × (-2/3) = ?", a: "2" },
             { q: "-7/2 е между кои цели числа?", a: "-4 и -3" },
             { q: "Кое е по-малко: -5/6 или -0.8?", a: "-5/6" },
-            { q: "3.25 като дроб = ?", a: "13/4" }
+            { q: "3.25 като дроб = ?", a: "13/4" },
+            { q: "Кое е по-голямо: -3.7 или -4.2?", a: "-3.7" },
+            { q: "0.(3) + 0.2 = ?", a: "0.5" }
         ];
         let currentTask = null;
         function generateTask() {
@@ -277,6 +292,11 @@
                 document.getElementById('taskResult').innerHTML = `Още малко! Отговорът е: <strong>${currentTask.a}</strong> 😊`;
             }
         }
+
+        // Генерира задача веднага при зареждане
+        window.onload = function() {
+            generateTask();
+        };
 
         // Тест
         function checkTest() {
@@ -296,7 +316,7 @@
             document.getElementById('result').innerHTML = `Точки: ${score}/8<br>${message}<br>Продължавай да упражняваш! ✨`;
         }
 
-        // Диаграма с множествата
+        // Диаграма
         const setsInfo = document.getElementById('setsInfo');
         document.getElementById('n').addEventListener('mouseenter', () => {
             setsInfo.textContent = 'ℕ – Естествени числа: 1, 2, 3, …';
