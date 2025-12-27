@@ -17,66 +17,125 @@
         h1 {
             text-align: center;
             color: #2c3e50;
-            border-bottom: 3px solid #3498db;
+            border-bottom: 4px solid #3498db;
             padding-bottom: 15px;
+            font-size: 2.6em;
         }
+        /* Бутони за бърз достъп с цветове */
+        .quick-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin: 60px 0;
+            padding: 40px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+        .nav-btn {
+            padding: 20px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            min-width: 250px;
+            color: white;
+        }
+        .nav-btn:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+        /* Цветове за категориите */
+        .btn-general { background: #3498db; } /* Син */
+        .btn-movement { background: #2ecc71; } /* Зелен */
+        .btn-interest { background: #e67e22; } /* Оранжев */
+        .btn-work { background: #9b59b6; } /* Лилав */
+        .btn-mix { background: #e74c3c; } /* Червен */
+
         h2 {
-            color: #2980b9;
-            margin-top: 50px;
-            border-left: 6px solid #3498db;
-            padding-left: 15px;
+            margin-top: 100px;
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 2em;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
+        #general { background: #3498db; }
+        #movement { background: #2ecc71; }
+        #interest { background: #e67e22; }
+        #work { background: #9b59b6; }
+        #mix { background: #e74c3c; }
+
         h3 {
             color: #2c3e50;
             background: #ecf0f1;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 6px solid #3498db;
         }
         .zadacha {
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            padding: 25px;
-            margin: 35px 0;
-            transition: transform 0.3s;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+            padding: 30px;
+            margin: 40px 0;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
         .zadacha:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.2);
         }
         .show-btn {
-            background: #3498db;
+            background: #34495e;
             color: white;
-            padding: 12px 25px;
+            padding: 14px 30px;
             border: none;
-            border-radius: 30px;
+            border-radius: 50px;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s;
         }
         .show-btn:hover {
-            background: #2980b9;
+            background: #2c3e50;
+            transform: translateY(-3px);
         }
         .reshenie {
             display: none;
-            margin-top: 25px;
+            margin-top: 30px;
+            padding: 25px;
+            background: #f8fcfd;
+            border-radius: 12px;
+            border: 1px solid #d0e8f2;
         }
         .two-columns {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            gap: 35px;
             align-items: start;
         }
         @media (max-width: 768px) {
             .two-columns {
                 grid-template-columns: 1fr;
             }
+            .quick-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            .nav-btn {
+                width: 85%;
+            }
         }
         .left-column {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 5px solid #27ae60;
+            background: #f0f8ff;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 6px solid #27ae60;
         }
         .right-column {
             display: flex;
@@ -87,57 +146,71 @@
             width: 100%;
             border-collapse: collapse;
             background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
         }
         th {
-            background: #3498db;
+            background: #34495e;
             color: white;
-            padding: 12px;
+            padding: 15px;
+            font-size: 1.1em;
         }
         td {
-            padding: 10px;
+            padding: 12px;
             text-align: center;
-            border: 1px solid #ddd;
+            border-bottom: 1px solid #eee;
         }
         .otgovor {
             grid-column: 1 / -1;
-            background: #d5f4e6;
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 1.2em;
+            background: linear-gradient(to right, #d5f4e6, #a8e6cf);
+            color: #1e8449;
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 1.4em;
             text-align: center;
-            color: #27ae60;
-            margin-top: 20px;
+            font-weight: bold;
+            margin-top: 25px;
+            box-shadow: 0 4px 15px rgba(39,174,96,0.2);
         }
         .check-answer {
             grid-column: 1 / -1;
-            margin-top: 25px;
-            padding: 20px;
-            background: #e3f2fd;
+            margin-top: 30px;
+            padding: 25px;
+            background: #e8f4fc;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(52,152,219,0.15);
+        }
+        .check-answer input {
+            padding: 12px;
+            width: 140px;
+            font-size: 1.1em;
+            border: 2px solid #3498db;
             border-radius: 8px;
             text-align: center;
         }
-        .check-answer input {
-            padding: 10px;
-            width: 120px;
-            font-size: 1em;
-        }
         .check-answer button {
-            padding: 10px 20px;
+            padding: 12px 30px;
             background: #27ae60;
             color: white;
             border: none;
-            border-radius: 25px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: bold;
             cursor: pointer;
-            margin-left: 10px;
+            margin-left: 15px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(39,174,96,0.4);
         }
         .check-answer button:hover {
             background: #219653;
+            transform: translateY(-2px);
         }
         .result {
-            margin-top: 10px;
+            margin-top: 15px;
+            font-size: 1.3em;
             font-weight: bold;
-            font-size: 1.1em;
         }
         .no-table {
             color: #777;
@@ -151,7 +224,16 @@
 <h1>Моделиране на текстови задачи с линейни уравнения</h1>
 <p style="text-align:center; font-size:1.1em; color:#555;">Решете задачите самостоятелно, след това проверете решението си!</p>
 
-<h2>1. Текстови задачи от общ характер</h2>
+<!-- Бутони за бърз достъп с цветове -->
+<div class="quick-nav">
+    <button class="nav-btn btn-general" onclick="document.getElementById('general').scrollIntoView({behavior: 'smooth'});">1. Общ характер</button>
+    <button class="nav-btn btn-movement" onclick="document.getElementById('movement').scrollIntoView({behavior: 'smooth'});">2. Движение</button>
+    <button class="nav-btn btn-interest" onclick="document.getElementById('interest').scrollIntoView({behavior: 'smooth'});">3. Проста лихва</button>
+    <button class="nav-btn btn-work" onclick="document.getElementById('work').scrollIntoView({behavior: 'smooth'});">4. Работа</button>
+    <button class="nav-btn btn-mix" onclick="document.getElementById('mix').scrollIntoView({behavior: 'smooth'});">5. Смеси и сплави</button>
+</div>
+
+<h2 id="general">1. Текстови задачи от общ характер</h2>
 
 <div class="zadacha">
     <h3>Задача 1: Числа и цифри</h3>
@@ -256,14 +338,14 @@
         <div class="otgovor">От по-евтините: 7,5 кг<br>От по-скъпите: 7,5 кг</div>
     </div>
     <div class="check-answer">
-        <label>Килограми от по-евтините: </label>
+        <label>Количество от по-евтините: </label>
         <input type="number" step="any" id="answer4">
         <button onclick="checkAnswer(4, 7.5)">Провери</button>
         <p id="result4" class="result"></p>
     </div>
 </div>
 
-<h2>2. Задачи от движение (по суша и вода)</h2>
+<h2 id="movement">2. Задачи от движение (по суша и вода)</h2>
 
 <div class="zadacha">
     <h3>Задача 5: Движение по суша (насрещно)</h3>
@@ -327,102 +409,105 @@
     </div>
 </div>
 
-<h2>3. Задачи от работа (производителност)</h2>
+<h2 id="interest">3. Задачи от проста лихва</h2>
 
 <div class="zadacha">
-    <h3>Задача 7: Работа заедно</h3>
-    <p>Първият работник може да свърши една работа сам за 6 дни, а вторият – за 12 дни. Ако работят заедно, за колко дни ще свършат същата работа?</p>
+    <h3>Задача 7: Проста лихва – основна сума</h3>
+    <p>Вложени са пари в банка при проста лихва от 5% годишно. След 4 години лихвата е 400 лв. Колко лева е била основната сума?</p>
     <button class="show-btn" onclick="toggleReshenie('resh7')">Покажи/Скрий решението</button>
     <div id="resh7" class="reshenie">
         <div class="two-columns">
             <div class="left-column">
-                <p>Нека заедно работят <strong>x</strong> дни.</p>
-                <p>Първият свършва: \(\frac{x}{6}\)</p>
-                <p>Вторият свършва: \(\frac{x}{12}\)</p>
-                <p><strong>Уравнение:</strong><br>\(\frac{x}{6} + \frac{x}{12} = 1\)</p>
-                <p>\(\frac{2x + x}{12} = 1\)<br>\(\frac{3x}{12} = 1\)<br>x = 4</p>
+                <p>Нека основната сума е <strong>x</strong> лв.</p>
+                <p>Лихва: x × 0.05 × 4 = 400</p>
+                <p><strong>Уравнение:</strong><br>0.2x = 400</p>
+                <p>x = 2000</p>
             </div>
             <div class="right-column">
                 <table>
-                    <tr><th>Работник</th><th>Сам (дни)</th><th>N (норма)</th><th>t (дни)</th><th>A (работа)</th></tr>
-                    <tr><td>Първи</td><td>6</td><td>\(\frac{1}{6}\)</td><td>x</td><td>\(\frac{x}{6}\)</td></tr>
-                    <tr><td>Втори</td><td>12</td><td>\(\frac{1}{12}\)</td><td>x</td><td>\(\frac{x}{12}\)</td></tr>
+                    <tr><th>Величина</th><th>Стойност</th></tr>
+                    <tr><td>Основна сума</td><td>x лв.</td></tr>
+                    <tr><td>Лихвен процент</td><td>5%</td></tr>
+                    <tr><td>Време</td><td>4 години</td></tr>
+                    <tr><td>Лихва</td><td>400 лв.</td></tr>
                 </table>
             </div>
         </div>
-        <div class="otgovor">Заедно ще свършат работата за 4 дни.</div>
+        <div class="otgovor">Основната сума е 2000 лв.</div>
     </div>
     <div class="check-answer">
-        <label>Дни заедно: </label>
+        <label>Основна сума (лв.): </label>
         <input type="number" id="answer7">
-        <button onclick="checkAnswer(7, 4)">Провери</button>
+        <button onclick="checkAnswer(7, 2000)">Провери</button>
         <p id="result7" class="result"></p>
     </div>
 </div>
 
 <div class="zadacha">
-    <h3>Задача 8: Работа с промяна</h3>
-    <p>Един работник може да свърши една работа сам за 15 дни. Той работи сам 5 дни, след което към него се присъединява втори работник, който сам би свършил същата работа за 10 дни. За колко дни двамата ще свършат останалата част от работата?</p>
+    <h3>Задача 8: Проста лихва – лихвен процент</h3>
+    <p>Вложени са 5000 лв. в банка при проста лихва. След 3 години лихвата е 900 лв. С какъв годишен лихвен процент са вложени парите?</p>
     <button class="show-btn" onclick="toggleReshenie('resh8')">Покажи/Скрий решението</button>
     <div id="resh8" class="reshenie">
         <div class="two-columns">
             <div class="left-column">
-                <p>Нека заедно работят още <strong>x</strong> дни.</p>
-                <p>Първият общо работи 5 + x дни → свършва \(\frac{5 + x}{15}\)</p>
-                <p>Вторият работи x дни → свършва \(\frac{x}{10}\)</p>
-                <p><strong>Уравнение:</strong><br>\(\frac{5 + x}{15} + \frac{x}{10} = 1\)</p>
-                <p>\(\frac{5}{15} + \frac{x}{15} + \frac{x}{10} = 1\)<br>\(\frac{1}{3} + \frac{x}{15} + \frac{x}{10} = 1\)<br>\(\frac{2x + 3x}{30} = \frac{2}{3}\)<br>\(\frac{5x}{30} = \frac{2}{3}\)<br>x = 4</p>
+                <p>Нека лихвеният процент е <strong>x</strong>%.</p>
+                <p>Лихва: 5000 × (x/100) × 3 = 900</p>
+                <p><strong>Уравнение:</strong><br>150x = 900</p>
+                <p>x = 6</p>
             </div>
             <div class="right-column">
                 <table>
-                    <tr><th>Работник</th><th>Сам (дни)</th><th>N (норма)</th><th>t (дни)</th><th>A (работа)</th></tr>
-                    <tr><td>Първи</td><td>15</td><td>\(\frac{1}{15}\)</td><td>5 + x</td><td>\(\frac{5 + x}{15}\)</td></tr>
-                    <tr><td>Втори</td><td>10</td><td>\(\frac{1}{10}\)</td><td>x</td><td>\(\frac{x}{10}\)</td></tr>
+                    <tr><th>Величина</th><th>Стойност</th></tr>
+                    <tr><td>Основна сума</td><td>5000 лв.</td></tr>
+                    <tr><td>Лихвен процент</td><td>x %</td></tr>
+                    <tr><td>Време</td><td>3 години</td></tr>
+                    <tr><td>Лихва</td><td>900 лв.</td></tr>
                 </table>
             </div>
         </div>
-        <div class="otgovor">Останалата част ще бъде свършена за 4 дни.</div>
+        <div class="otgovor">Годишният лихвен процент е 6%.</div>
     </div>
     <div class="check-answer">
-        <label>Дни заедно за останалото: </label>
+        <label>Лихвен процент (%): </label>
         <input type="number" id="answer8">
-        <button onclick="checkAnswer(8, 4)">Провери</button>
+        <button onclick="checkAnswer(8, 6)">Провери</button>
         <p id="result8" class="result"></p>
     </div>
 </div>
 
-<h2>4. Допълнителни задачи</h2>
-
 <div class="zadacha">
-    <h3>Задача 9: Тръби и пълнене на басейн</h3>
-    <p>Две тръби пълнят един басейн. Първата тръба сама би напълнила басейна за 12 часа, а втората – за 18 часа. За колко часа ще напълнят басейна, ако работят заедно?</p>
+    <h3>Задача 9: Проста лихва – време</h3>
+    <p>Вложени са 8000 лв. при проста лихва от 4% годишно. След колко години лихвата ще бъде 1600 лв.?</p>
     <button class="show-btn" onclick="toggleReshenie('resh9')">Покажи/Скрий решението</button>
     <div id="resh9" class="reshenie">
         <div class="two-columns">
             <div class="left-column">
-                <p>Нека заедно напълнят басейна за <strong>x</strong> часа.</p>
-                <p>Производителност на първата: \(\frac{1}{12}\)</p>
-                <p>Производителност на втората: \(\frac{1}{18}\)</p>
-                <p><strong>Уравнение:</strong><br>\(\frac{x}{12} + \frac{x}{18} = 1\)</p>
-                <p>\(\frac{3x + 2x}{36} = 1\)<br>\(\frac{5x}{36} = 1\)<br>x = \(\frac{36}{5} = 7.2\)</p>
+                <p>Нека времето е <strong>x</strong> години.</p>
+                <p>Лихва: 8000 × 0.04 × x = 1600</p>
+                <p><strong>Уравнение:</strong><br>320x = 1600</p>
+                <p>x = 5</p>
             </div>
             <div class="right-column">
                 <table>
-                    <tr><th>Тръба</th><th>Сам (часове)</th><th>N (производителност)</th><th>t (часове)</th><th>A (басейн)</th></tr>
-                    <tr><td>Първа</td><td>12</td><td>\(\frac{1}{12}\)</td><td>x</td><td>\(\frac{x}{12}\)</td></tr>
-                    <tr><td>Втора</td><td>18</td><td>\(\frac{1}{18}\)</td><td>x</td><td>\(\frac{x}{18}\)</td></tr>
+                    <tr><th>Величина</th><th>Стойност</th></tr>
+                    <tr><td>Основна сума</td><td>8000 лв.</td></tr>
+                    <tr><td>Лихвен процент</td><td>4%</td></tr>
+                    <tr><td>Време</td><td>x години</td></tr>
+                    <tr><td>Лихва</td><td>1600 лв.</td></tr>
                 </table>
             </div>
         </div>
-        <div class="otgovor">Заедно ще напълнят басейна за 7,2 часа.</div>
+        <div class="otgovor">Лихвата ще бъде 1600 лв. след 5 години.</div>
     </div>
     <div class="check-answer">
-        <label>Часове заедно: </label>
-        <input type="number" step="any" id="answer9">
-        <button onclick="checkAnswer(9, 7.2)">Провери</button>
+        <label>Време (години): </label>
+        <input type="number" id="answer9">
+        <button onclick="checkAnswer(9, 5)">Провери</button>
         <p id="result9" class="result"></p>
     </div>
 </div>
+
+<h2 id="work">4. Задачи от работа (производителност)</h2>
 
 <div class="zadacha">
     <h3>Задача 10: Багер и нива</h3>
@@ -437,7 +522,7 @@
                 <p>С тази норма изорал нивата за 10 дни → площта е <strong>10(x + 10)</strong> декара.</p>
                 <p><strong>Уравнение:</strong><br>12x = 10(x + 10)</p>
                 <p>12x = 10x + 100<br>2x = 100<br>x = 50</p>
-                <p>Площта на нивата е 12x = 12 × 50 = 600 декара.</p>
+                <p>Площта на нивата е 12 × 50 = 600 декара.</p>
             </div>
             <div class="right-column">
                 <table>
@@ -450,7 +535,7 @@
         <div class="otgovor">Нивата е 600 декара.</div>
     </div>
     <div class="check-answer">
-        <label>Площ на нивата (декара): </label>
+        <label>Количество от площта (декара): </label>
         <input type="number" id="answer10">
         <button onclick="checkAnswer(10, 600)">Провери</button>
         <p id="result10" class="result"></p>
@@ -496,6 +581,142 @@
     </div>
 </div>
 
+<h2 id="mix">5. Задачи от смеси и сплави</h2>
+
+<div class="zadacha">
+    <h3>Задача 12: Смес от два вида кафе</h3>
+    <p>Имаме два вида кафе – първият струва 12 лв./кг и съдържа 80% арабика, вторият – 18 лв./кг и съдържа 100% арабика. Колко килограма от всеки вид трябва да смесим, за да получим 10 кг смес с 90% арабика?</p>
+    <button class="show-btn" onclick="toggleReshenie('resh12')">Покажи/Скрий решението</button>
+    <div id="resh12" class="reshenie">
+        <div class="two-columns">
+            <div class="left-column">
+                <p>Нека от първия вид вземем <strong>x</strong> кг.</p>
+                <p>Тогава от втория вид: 10 – x кг.</p>
+                <p>Арабика: 0.8x + 1.0(10 – x) = 0.9 × 10</p>
+                <p><strong>Уравнение:</strong><br>0.8x + 10 – x = 9</p>
+                <p>10 – 0.2x = 9<br>0.2x = 1<br>x = 5</p>
+            </div>
+            <div class="right-column">
+                <table>
+                    <tr><th>Вид</th><th>Количество (кг)</th><th>Арабика (%)</th><th>Арабика (кг)</th></tr>
+                    <tr><td>Първи</td><td>x</td><td>80</td><td>0.8x</td></tr>
+                    <tr><td>Втори</td><td>10 – x</td><td>100</td><td>10 – x</td></tr>
+                    <tr><td>Смес</td><td>10</td><td>90</td><td>9</td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="otgovor">От първия вид: 5 кг<br>От втория вид: 5 кг</div>
+    </div>
+    <div class="check-answer">
+        <label>Количество от първия вид: </label>
+        <input type="number" step="any" id="answer12">
+        <button onclick="checkAnswer(12, 5)">Провери</button>
+        <p id="result12" class="result"></p>
+    </div>
+</div>
+
+<div class="zadacha">
+    <h3>Задача 13: Смес от две сплави</h3>
+    <p>Имаме сплав с 80% злато и сплав с 50% злато. Колко грама от всяка сплав трябва да смесим, за да получим 100 г сплав с 65% злато?</p>
+    <button class="show-btn" onclick="toggleReshenie('resh13')">Покажи/Скрий решението</button>
+    <div id="resh13" class="reshenie">
+        <div class="two-columns">
+            <div class="left-column">
+                <p>Нека от 80% сплав вземем <strong>x</strong> г.</p>
+                <p>Тогава от 50% сплав: 100 – x г.</p>
+                <p>Злато: 0.8x + 0.5(100 – x) = 65</p>
+                <p><strong>Уравнение:</strong><br>0.8x + 50 – 0.5x = 65</p>
+                <p>0.3x = 15<br>x = 50</p>
+                <p>От 80% сплав: 50 г<br>От 50% сплав: 50 г</p>
+            </div>
+            <div class="right-column">
+                <table>
+                    <tr><th>Сплав</th><th>Количество (г)</th><th>Чисто в-во (злато, %)</th><th>Злато (г)</th></tr>
+                    <tr><td>80%</td><td>x</td><td>80</td><td>0.8x</td></tr>
+                    <tr><td>50%</td><td>100 – x</td><td>50</td><td>0.5(100 – x)</td></tr>
+                    <tr><td>Смес</td><td>100</td><td>65</td><td>65</td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="otgovor">От 80% сплав: 50 г<br>От 50% сплав: 50 г</div>
+    </div>
+    <div class="check-answer">
+        <label>Количество от 80% сплав: </label>
+        <input type="number" id="answer13">
+        <button onclick="checkAnswer(13, 50)">Провери</button>
+        <p id="result13" class="result"></p>
+    </div>
+</div>
+
+<div class="zadacha">
+    <h3>Задача 14: Смес от разтвор и вода</h3>
+    <p>Имаме 40% разтвор на сол и чиста вода. Колко грама от 40% разтвор трябва да добавим към 300 г вода, за да получим 20% разтвор?</p>
+    <button class="show-btn" onclick="toggleReshenie('resh14')">Покажи/Скрий решението</button>
+    <div id="resh14" class="reshenie">
+        <div class="two-columns">
+            <div class="left-column">
+                <p>Нека добавим <strong>x</strong> г от 40% разтвор.</p>
+                <p>Сол в разтвора: 0.4x г</p>
+                <p>Общо тегло на сместа: 300 + x г</p>
+                <p>Сол в сместа: 0.4x г</p>
+                <p>Концентрация: \(\frac{0.4x}{300 + x} = 0.2\)</p>
+                <p><strong>Уравнение:</strong><br>0.4x = 0.2(300 + x)</p>
+                <p>0.4x = 60 + 0.2x<br>0.2x = 60<br>x = 300</p>
+            </div>
+            <div class="right-column">
+                <table>
+                    <tr><th>Разтвор</th><th>Количество разтвор (г)</th><th>Чисто в-во (сол, %)</th><th>Количество чисто в-во (сол, г)</th></tr>
+                    <tr><td>Първи р-р (вода)</td><td>300</td><td>0</td><td>0</td></tr>
+                    <tr><td>Втори р-р</td><td>x</td><td>40</td><td>0.4x</td></tr>
+                    <tr><td>Смес</td><td>300 + x</td><td>20</td><td>0.2(300 + x)</td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="otgovor">Трябва да добавим 300 г от 40% разтвор.</div>
+    </div>
+    <div class="check-answer">
+        <label>Количество от 40% разтвор: </label>
+        <input type="number" id="answer14">
+        <button onclick="checkAnswer(14, 300)">Провери</button>
+        <p id="result14" class="result"></p>
+    </div>
+</div>
+
+<div class="zadacha">
+    <h3>Задача 15: Смес от две сплави</h3>
+    <p>Имаме сплав с 90% злато и сплав с 50% злато. Колко грама от всяка сплав трябва да смесим, за да получим 100 г сплав с 70% злато?</p>
+    <button class="show-btn" onclick="toggleReshenie('resh15')">Покажи/Скрий решението</button>
+    <div id="resh15" class="reshenie">
+        <div class="two-columns">
+            <div class="left-column">
+                <p>Нека от 90% сплав вземем <strong>x</strong> г.</p>
+                <p>Тогава от 50% сплав: 100 – x г.</p>
+                <p>Злато от първата сплав: 0.9x г</p>
+                <p>Злато от втората сплав: 0.5(100 – x) г</p>
+                <p>Общо злато в сместа: 70 г</p>
+                <p><strong>Уравнение:</strong><br>0.9x + 0.5(100 – x) = 70</p>
+                <p>0.9x + 50 – 0.5x = 70<br>0.4x = 20<br>x = 50</p>
+                <p>От 90% сплав: 50 г<br>От 50% сплав: 50 г</p>
+            </div>
+            <div class="right-column">
+                <table>
+                    <tr><th>Сплав</th><th>Количество (г)</th><th>Чисто в-во (злато, %)</th><th>Злато (г)</th></tr>
+                    <tr><td>90%</td><td>x</td><td>90</td><td>0.9x</td></tr>
+                    <tr><td>50%</td><td>100 – x</td><td>50</td><td>0.5(100 – x)</td></tr>
+                    <tr><td>Смес</td><td>100</td><td>70</td><td>70</td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="otgovor">От 90% сплав: 50 г<br>От 50% сплав: 50 г</div>
+    </div>
+    <div class="check-answer">
+        <label>Количество от 90% сплав: </label>
+        <input type="number" id="answer15">
+        <button onclick="checkAnswer(15, 50)">Провери</button>
+        <p id="result15" class="result"></p>
+    </div>
+</div>
+
 <p style="text-align:center; margin-top:60px;"><a href="index.html" style="font-size:1.2em; color:#3498db; text-decoration:none;">◄ Обратно към началото</a></p>
 
 <script>
@@ -505,7 +726,7 @@
     }
 
     function checkAnswer(taskNum, correct) {
-        let inputs = ['answer' + taskNum + 'a', 'answer' + taskNum + 'b', 'answer' + taskNum];
+        let inputs = ['answer' + taskNum, 'answer' + taskNum + 'a', 'answer' + taskNum + 'b'];
         let result = document.getElementById('result' + taskNum);
         let message = "";
         let allCorrect = true;
