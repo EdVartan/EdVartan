@@ -4,160 +4,527 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Моделиране с линейни уравнения</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
-        h1, h2, h3 { color: #333; }
-        .zadacha { background: #f9f9f9; padding: 15px; margin: 30px 0; border-left: 5px solid #007bff; }
-        table { border-collapse: collapse; width: 100%; margin: 15px 0; }
-        table, th, td { border: 1px solid #999; padding: 10px; text-align: center; }
-        th { background-color: #e7f0ff; }
-        .show-btn { cursor: pointer; color: #007bff; font-weight: bold; margin-top: 10px; display: inline-block; }
-        .reshenie { display: none; margin-top: 15px; padding: 15px; background: #fff; border: 1px solid #ddd; border-radius: 5px; }
-        .otgovor { font-weight: bold; color: #d9534f; margin-top: 15px; font-size: 1.1em; }
-    </style>
-    <script>
-        function toggleReshenie(id) {
-            var el = document.getElementById(id);
-            if (el.style.display === "block") {
-                el.style.display = "none";
-            } else {
-                el.style.display = "block";
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 40px auto;
+            max-width: 1000px;
+            background: #f8f9fa;
+            color: #333;
+            line-height: 1.7;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 50px;
+            border-left: 6px solid #3498db;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #2c3e50;
+            background: #ecf0f1;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .zadacha {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 25px;
+            margin: 35px 0;
+            transition: transform 0.3s;
+        }
+        .zadacha:hover {
+            transform: translateY(-5px);
+        }
+        .show-btn {
+            background: #3498db;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .show-btn:hover {
+            background: #2980b9;
+        }
+        .reshenie {
+            display: none;
+            margin-top: 25px;
+        }
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+        @media (max-width: 768px) {
+            .two-columns {
+                grid-template-columns: 1fr;
             }
         }
-    </script>
+        .left-column {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid #27ae60;
+        }
+        .right-column {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        th {
+            background: #3498db;
+            color: white;
+            padding: 12px;
+        }
+        td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        .otgovor {
+            grid-column: 1 / -1;
+            background: #d5f4e6;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.2em;
+            text-align: center;
+            color: #27ae60;
+            margin-top: 20px;
+        }
+        .check-answer {
+            grid-column: 1 / -1;
+            margin-top: 25px;
+            padding: 20px;
+            background: #e3f2fd;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .check-answer input {
+            padding: 10px;
+            width: 120px;
+            font-size: 1em;
+        }
+        .check-answer button {
+            padding: 10px 20px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .check-answer button:hover {
+            background: #219653;
+        }
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .no-table {
+            color: #777;
+            font-style: italic;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
 <h1>Моделиране на текстови задачи с линейни уравнения</h1>
-<p>Всички задачи са решени с използване на само едно неизвестно x. Кликни върху бутона, за да видиш решението.</p>
+<p style="text-align:center; font-size:1.1em; color:#555;">Решете задачите самостоятелно, след това проверете решението си!</p>
 
 <h2>1. Текстови задачи от общ характер</h2>
 
 <div class="zadacha">
     <h3>Задача 1: Числа и цифри</h3>
-    <p>Цифрата на десетиците на едно двуцифрено число е с 2 по-голяма от цифрата на единиците. Сборът на цифрите е една седма от числото. Намерете числото.</p>
-    <div class="show-btn" onclick="toggleReshenie('resh1')">▶ Покажи/Скрий решението</div>
+    <p>Цифрата на десетиците на едно двуцифрено число е с 2 по-голяма от цифрата на единиците. Сборът на цифрите е \(\frac{1}{7}\) от числото. Намерете числото.</p>
+    <button class="show-btn" onclick="toggleReshenie('resh1')">Покажи/Скрий решението</button>
     <div id="resh1" class="reshenie">
-        <p>Нека цифрата на единиците е <strong>x</strong>.<br>
-        Тогава цифрата на десетиците е <strong>x + 2</strong>.</p>
-        <p>Числото: 10(x + 2) + x = 11x + 20</p>
-        <p>Сборът на цифрите: x + (x + 2) = 2x + 2</p>
-        <p><strong>Уравнение:</strong> 2x + 2 = (11x + 20)/7</p>
-        <p>14x + 14 = 11x + 20 → 3x = 6 → x = 2</p>
+        <div class="two-columns">
+            <div class="left-column">
+                <p>Нека цифрата на единиците е <strong>x</strong>.<br>
+                Тогава цифрата на десетиците е <strong>x + 2</strong>.</p>
+                <p>Числото: 10(x + 2) + x = 11x + 20</p>
+                <p>Сборът на цифрите: x + (x + 2) = 2x + 2</p>
+                <p><strong>Уравнение:</strong><br>2x + 2 = \(\frac{11x + 20}{7}\)</p>
+                <p>14x + 14 = 11x + 20<br>3x = 6<br>x = 2</p>
+            </div>
+            <div class="right-column">
+                <p class="no-table">(няма таблица за тази задача)</p>
+            </div>
+        </div>
         <div class="otgovor">Числото е 42.</div>
+    </div>
+    <div class="check-answer">
+        <label>Твоят отговор за числото: </label>
+        <input type="number" id="answer1">
+        <button onclick="checkAnswer(1, 42)">Провери</button>
+        <p id="result1" class="result"></p>
     </div>
 </div>
 
 <div class="zadacha">
     <h3>Задача 2: Сбор и разлика на две числа</h3>
     <p>Сборът на две числа е 85, а разликата им е 23. Намерете числата.</p>
-    <div class="show-btn" onclick="toggleReshenie('resh2')">▶ Покажи/Скрий решението</div>
+    <button class="show-btn" onclick="toggleReshenie('resh2')">Покажи/Скрий решението</button>
     <div id="resh2" class="reshenie">
-        <p>Нека по-малкото число е <strong>x</strong>.<br>
-        Тогава по-голямото е <strong>x + 23</strong>.</p>
-        <p><strong>Уравнение:</strong> x + (x + 23) = 85</p>
-        <p>2x + 23 = 85 → 2x = 62 → x = 31</p>
+        <div class="two-columns">
+            <div class="left-column">
+                <p>Нека по-малкото число е <strong>x</strong>.<br>
+                Тогава по-голямото е <strong>x + 23</strong>.</p>
+                <p><strong>Уравнение:</strong><br>x + (x + 23) = 85</p>
+                <p>2x + 23 = 85<br>2x = 62<br>x = 31</p>
+            </div>
+            <div class="right-column">
+                <p class="no-table">(няма таблица за тази задача)</p>
+            </div>
+        </div>
         <div class="otgovor">Числата са 31 и 54.</div>
+    </div>
+    <div class="check-answer">
+        <label>По-малкото число: </label>
+        <input type="number" id="answer2">
+        <button onclick="checkAnswer(2, 31)">Провери</button>
+        <p id="result2" class="result"></p>
     </div>
 </div>
 
 <div class="zadacha">
     <h3>Задача 3: Част от едно число равно на част от друго</h3>
     <p>Едно число е 3 пъти по-голямо от друго. Ако към по-малкото прибавим 20, то ще стане равно на половината от по-голямото. Намерете числата.</p>
-    <div class="show-btn" onclick="toggleReshenie('resh3')">▶ Покажи/Скрий решението</div>
+    <button class="show-btn" onclick="toggleReshenie('resh3')">Покажи/Скрий решението</button>
     <div id="resh3" class="reshenie">
-        <p>Нека по-малкото число е <strong>x</strong>.<br>
-        Тогава по-голямото е <strong>3x</strong>.</p>
-        <p><strong>Уравнение:</strong> x + 20 = (3x)/2</p>
-        <p>2x + 40 = 3x → 40 = x</p>
+        <div class="two-columns">
+            <div class="left-column">
+                <p>Нека по-малкото число е <strong>x</strong>.<br>
+                Тогава по-голямото е <strong>3x</strong>.</p>
+                <p><strong>Уравнение:</strong><br>x + 20 = \(\frac{3x}{2}\)</p>
+                <p>2x + 40 = 3x<br>40 = x</p>
+            </div>
+            <div class="right-column">
+                <p class="no-table">(няма таблица за тази задача)</p>
+            </div>
+        </div>
         <div class="otgovor">Числата са 40 и 120.</div>
+    </div>
+    <div class="check-answer">
+        <label>По-малкото число: </label>
+        <input type="number" id="answer3">
+        <button onclick="checkAnswer(3, 40)">Провери</button>
+        <p id="result3" class="result"></p>
     </div>
 </div>
 
 <div class="zadacha">
     <h3>Задача 4: Пазар – покупка на два вида стоки</h3>
     <p>В магазин едни ябълки струват 2,40 лв./кг, а други – 3,60 лв./кг. Купени са общо 15 кг ябълки от двата вида и е платено 45 лв. Колко килограма са купени от всеки вид?</p>
-    <div class="show-btn" onclick="toggleReshenie('resh4')">▶ Покажи/Скрий решението</div>
+    <button class="show-btn" onclick="toggleReshenie('resh4')">Покажи/Скрий решението</button>
     <div id="resh4" class="reshenie">
-        <table>
-            <tr><th>Вид ябълки</th><th>Количество (кг)</th><th>Цена (лв./кг)</th><th>Стойност (лв.)</th></tr>
-            <tr><td>По-евтини</td><td>x</td><td>2,40</td><td>2,40x</td></tr>
-            <tr><td>По-скъпи</td><td>15 – x</td><td>3,60</td><td>3,60(15 – x)</td></tr>
-            <tr><td>Общо</td><td>15</td><td>—</td><td>45</td></tr>
-        </table>
-        <p><strong>Уравнение:</strong> 2,40x + 3,60(15 – x) = 45</p>
-        <p>2,40x + 54 – 3,60x = 45 → –1,20x = –9 → x = 7,5</p>
+        <div class="two-columns">
+            <div class="left-column">
+                <p>Нека от по-евтините е <strong>x</strong> кг.<br>
+                Тогава от по-скъпите е <strong>15 – x</strong> кг.</p>
+                <p><strong>Уравнение:</strong><br>2.4x + 3.6(15 – x) = 45</p>
+                <p>2.4x + 54 – 3.6x = 45<br>–1.2x = –9<br>x = 7.5</p>
+            </div>
+            <div class="right-column">
+                <table>
+                    <tr><th>Вид ябълки</th><th>Количество (кг)</th><th>Цена (лв./кг)</th><th>Стойност (лв.)</th></tr>
+                    <tr><td>По-евтини</td><td>x</td><td>2.4</td><td>2.4x</td></tr>
+                    <tr><td>По-скъпи</td><td>15 – x</td><td>3.6</td><td>3.6(15 – x)</td></tr>
+                </table>
+            </div>
+        </div>
         <div class="otgovor">От по-евтините: 7,5 кг<br>От по-скъпите: 7,5 кг</div>
     </div>
+    <div class="check-answer">
+        <label>Килограми от по-евтините: </label>
+        <input type="number" step="any" id="answer4">
+        <button onclick="checkAnswer(4, 7.5)">Провери</button>
+        <p id="result4" class="result"></p>
+    </div>
 </div>
+
+<h2>2. Задачи от движение (по суша и вода)</h2>
 
 <div class="zadacha">
     <h3>Задача 5: Движение по суша (насрещно)</h3>
     <p>Двама пешеходци тръгват едновременно насреща един на друг от два града, отдалечени на 30 км, и се срещат след 4 часа. Първият върви с 4 км/ч. С каква скорост върви вторият?</p>
-    <div class="show-btn" onclick="toggleReshenie('resh5')">▶ Покажи/Скрий решението</div>
+    <button class="show-btn" onclick="toggleReshenie('resh5')">Покажи/Скрий решението</button>
     <div id="resh5" class="reshenie">
-        <table>
-            <tr><th>Пешеходец</th><th>V (скорост, км/ч)</th><th>t (време, ч)</th><th>S (път, км)</th></tr>
-            <tr><td>Първи</td><td>4</td><td>4</td><td>16</td></tr>
-            <tr><td>Втори</td><td>x</td><td>4</td><td>4x</td></tr>
-            <tr><td>Общо</td><td>—</td><td>—</td><td>30</td></tr>
-        </table>
-        <p><strong>Уравнение:</strong> 16 + 4x = 30 → 4x = 14 → x = 3,5</p>
+        <div class="two-columns">
+            <div class="left-column">
+                <p>Нека скоростта на втория е <strong>x</strong> км/ч.</p>
+                <p>За 4 часа първият изминава 16 км.</p>
+                <p>Вторият изминава 4x км.</p>
+                <p><strong>Уравнение:</strong><br>16 + 4x = 30</p>
+                <p>4x = 14<br>x = 3.5</p>
+            </div>
+            <div class="right-column">
+                <table>
+                    <tr><th>Пешеходец</th><th>V (км/ч)</th><th>t (ч)</th><th>S (км)</th></tr>
+                    <tr><td>Първи</td><td>4</td><td>4</td><td>16</td></tr>
+                    <tr><td>Втори</td><td>x</td><td>4</td><td>4x</td></tr>
+                </table>
+            </div>
+        </div>
         <div class="otgovor">Скоростта на втория пешеходец е 3,5 км/ч.</div>
+    </div>
+    <div class="check-answer">
+        <label>Скорост на втория (км/ч): </label>
+        <input type="number" step="any" id="answer5">
+        <button onclick="checkAnswer(5, 3.5)">Провери</button>
+        <p id="result5" class="result"></p>
     </div>
 </div>
 
 <div class="zadacha">
     <h3>Задача 6: Движение по вода</h3>
     <p>Лодка изминава едно и също разстояние по течение за 3 часа, а срещу течение – за 5 часа. Скоростта на течението е 2 км/ч. Намерете собствената скорост на лодката.</p>
-    <div class="show-btn" onclick="toggleReshenie('resh6')">▶ Покажи/Скрий решението</div>
+    <button class="show-btn" onclick="toggleReshenie('resh6')">Покажи/Скрий решението</button>
     <div id="resh6" class="reshenie">
-        <table>
-            <tr><th>Условие</th><th>V (скорост, км/ч)</th><th>t (време, ч)</th><th>S (път, км)</th></tr>
-            <tr><td>По течение</td><td>x + 2</td><td>3</td><td>3(x + 2)</td></tr>
-            <tr><td>Срещу течение</td><td>x – 2</td><td>5</td><td>5(x – 2)</td></tr>
-        </table>
-        <p><strong>Уравнение:</strong> 3(x + 2) = 5(x – 2)</p>
-        <p>3x + 6 = 5x – 10 → 16 = 2x → x = 8</p>
+        <div class="two-columns">
+            <div class="left-column">
+                <p>Нека собствената скорост е <strong>x</strong> км/ч.</p>
+                <p>По течение: x + 2 км/ч</p>
+                <p>Срещу течение: x – 2 км/ч</p>
+                <p><strong>Уравнение:</strong><br>3(x + 2) = 5(x – 2)</p>
+                <p>3x + 6 = 5x – 10<br>16 = 2x<br>x = 8</p>
+            </div>
+            <div class="right-column">
+                <table>
+                    <tr><th>Условие</th><th>V (км/ч)</th><th>t (ч)</th><th>S (км)</th></tr>
+                    <tr><td>По течение</td><td>x + 2</td><td>3</td><td>3(x + 2)</td></tr>
+                    <tr><td>Срещу течение</td><td>x – 2</td><td>5</td><td>5(x – 2)</td></tr>
+                </table>
+            </div>
+        </div>
         <div class="otgovor">Собствената скорост на лодката е 8 км/ч.</div>
     </div>
+    <div class="check-answer">
+        <label>Собствена скорост (км/ч): </label>
+        <input type="number" id="answer6">
+        <button onclick="checkAnswer(6, 8)">Провери</button>
+        <p id="result6" class="result"></p>
+    </div>
 </div>
+
+<h2>3. Задачи от работа (производителност)</h2>
 
 <div class="zadacha">
     <h3>Задача 7: Работа заедно</h3>
     <p>Първият работник може да свърши една работа сам за 6 дни, а вторият – за 12 дни. Ако работят заедно, за колко дни ще свършат същата работа?</p>
-    <div class="show-btn" onclick="toggleReshenie('resh7')">▶ Покажи/Скрий решението</div>
+    <button class="show-btn" onclick="toggleReshenie('resh7')">Покажи/Скрий решението</button>
     <div id="resh7" class="reshenie">
-        <table>
-            <tr><th>Работник</th><th>Сам (дни)</th><th>N (норма, част/ден)</th><th>t (време, дни)</th><th>A (работа)</th></tr>
-            <tr><td>Първи</td><td>6</td><td>1/6</td><td>x</td><td>(1/6) × x</td></tr>
-            <tr><td>Втори</td><td>12</td><td>1/12</td><td>x</td><td>(1/12) × x</td></tr>
-        </table>
-        <p>Заедно свършват: (1/6 + 1/12) × x = 1</p>
-        <p><strong>Уравнение:</strong> (1/4) × x = 1 → x = 4</p>
+        <div class="two-columns">
+            <div class="left-column">
+                <p>Нека заедно работят <strong>x</strong> дни.</p>
+                <p>Първият свършва: \(\frac{x}{6}\)</p>
+                <p>Вторият свършва: \(\frac{x}{12}\)</p>
+                <p><strong>Уравнение:</strong><br>\(\frac{x}{6} + \frac{x}{12} = 1\)</p>
+                <p>\(\frac{2x + x}{12} = 1\)<br>\(\frac{3x}{12} = 1\)<br>x = 4</p>
+            </div>
+            <div class="right-column">
+                <table>
+                    <tr><th>Работник</th><th>Сам (дни)</th><th>N (норма)</th><th>t (дни)</th><th>A (работа)</th></tr>
+                    <tr><td>Първи</td><td>6</td><td>\(\frac{1}{6}\)</td><td>x</td><td>\(\frac{x}{6}\)</td></tr>
+                    <tr><td>Втори</td><td>12</td><td>\(\frac{1}{12}\)</td><td>x</td><td>\(\frac{x}{12}\)</td></tr>
+                </table>
+            </div>
+        </div>
         <div class="otgovor">Заедно ще свършат работата за 4 дни.</div>
+    </div>
+    <div class="check-answer">
+        <label>Дни заедно: </label>
+        <input type="number" id="answer7">
+        <button onclick="checkAnswer(7, 4)">Провери</button>
+        <p id="result7" class="result"></p>
     </div>
 </div>
 
 <div class="zadacha">
     <h3>Задача 8: Работа с промяна</h3>
     <p>Един работник може да свърши една работа сам за 15 дни. Той работи сам 5 дни, след което към него се присъединява втори работник, който сам би свършил същата работа за 10 дни. За колко дни двамата ще свършат останалата част от работата?</p>
-    <div class="show-btn" onclick="toggleReshenie('resh8')">▶ Покажи/Скрий решението</div>
+    <button class="show-btn" onclick="toggleReshenie('resh8')">Покажи/Скрий решението</button>
     <div id="resh8" class="reshenie">
-        <table>
-            <tr><th>Описание</th><th>Сам (дни)</th><th>N (норма, част/ден)</th><th>t (време, дни)</th><th>A (работа)</th></tr>
-            <tr><td>Първи сам</td><td>15</td><td>1/15</td><td>5</td><td>5 × 1/15 = 1/3</td></tr>
-            <tr><td>Първи заедно</td><td>—</td><td>1/15</td><td>x</td><td>(1/15) × x</td></tr>
-            <tr><td>Втори заедно</td><td>10</td><td>1/10</td><td>x</td><td>(1/10) × x</td></tr>
-        </table>
-        <p>Остава 1 – 1/3 = 2/3 от работата.</p>
-        <p>Заедно свършват за x дни: (1/15 + 1/10) × x = 2/3</p>
-        <p><strong>Уравнение:</strong> (1/6) × x = 2/3 → x = 4</p>
+        <div class="two-columns">
+            <div class="left-column">
+                <p>Нека заедно работят още <strong>x</strong> дни.</p>
+                <p>Първият общо работи 5 + x дни → свършва \(\frac{5 + x}{15}\)</p>
+                <p>Вторият работи x дни → свършва \(\frac{x}{10}\)</p>
+                <p><strong>Уравнение:</strong><br>\(\frac{5 + x}{15} + \frac{x}{10} = 1\)</p>
+                <p>\(\frac{5}{15} + \frac{x}{15} + \frac{x}{10} = 1\)<br>\(\frac{1}{3} + \frac{x}{15} + \frac{x}{10} = 1\)<br>\(\frac{2x + 3x}{30} = \frac{2}{3}\)<br>\(\frac{5x}{30} = \frac{2}{3}\)<br>x = 4</p>
+            </div>
+            <div class="right-column">
+                <table>
+                    <tr><th>Работник</th><th>Сам (дни)</th><th>N (норма)</th><th>t (дни)</th><th>A (работа)</th></tr>
+                    <tr><td>Първи</td><td>15</td><td>\(\frac{1}{15}\)</td><td>5 + x</td><td>\(\frac{5 + x}{15}\)</td></tr>
+                    <tr><td>Втори</td><td>10</td><td>\(\frac{1}{10}\)</td><td>x</td><td>\(\frac{x}{10}\)</td></tr>
+                </table>
+            </div>
+        </div>
         <div class="otgovor">Останалата част ще бъде свършена за 4 дни.</div>
+    </div>
+    <div class="check-answer">
+        <label>Дни заедно за останалото: </label>
+        <input type="number" id="answer8">
+        <button onclick="checkAnswer(8, 4)">Провери</button>
+        <p id="result8" class="result"></p>
     </div>
 </div>
 
-<p><a href="index.html">Обратно към началото</a></p>
+<h2>4. Допълнителни задачи</h2>
+
+<div class="zadacha">
+    <h3>Задача 9: Тръби и пълнене на басейн</h3>
+    <p>Две тръби пълнят един басейн. Първата тръба сама би напълнила басейна за 12 часа, а втората – за 18 часа. За колко часа ще напълнят басейна, ако работят заедно?</p>
+    <button class="show-btn" onclick="toggleReshenie('resh9')">Покажи/Скрий решението</button>
+    <div id="resh9" class="reshenie">
+        <div class="two-columns">
+            <div class="left-column">
+                <p>Нека заедно напълнят басейна за <strong>x</strong> часа.</p>
+                <p>Производителност на първата: \(\frac{1}{12}\)</p>
+                <p>Производителност на втората: \(\frac{1}{18}\)</p>
+                <p><strong>Уравнение:</strong><br>\(\frac{x}{12} + \frac{x}{18} = 1\)</p>
+                <p>\(\frac{3x + 2x}{36} = 1\)<br>\(\frac{5x}{36} = 1\)<br>x = \(\frac{36}{5} = 7.2\)</p>
+            </div>
+            <div class="right-column">
+                <table>
+                    <tr><th>Тръба</th><th>Сам (часове)</th><th>N (производителност)</th><th>t (часове)</th><th>A (басейн)</th></tr>
+                    <tr><td>Първа</td><td>12</td><td>\(\frac{1}{12}\)</td><td>x</td><td>\(\frac{x}{12}\)</td></tr>
+                    <tr><td>Втора</td><td>18</td><td>\(\frac{1}{18}\)</td><td>x</td><td>\(\frac{x}{18}\)</td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="otgovor">Заедно ще напълнят басейна за 7,2 часа.</div>
+    </div>
+    <div class="check-answer">
+        <label>Часове заедно: </label>
+        <input type="number" step="any" id="answer9">
+        <button onclick="checkAnswer(9, 7.2)">Провери</button>
+        <p id="result9" class="result"></p>
+    </div>
+</div>
+
+<div class="zadacha">
+    <h3>Задача 10: Багер и нива</h3>
+    <p>Един багер трябвало да изоре една нива за 12 дни. След като увеличил дневната си норма с 10 декара, той успял да изоре нивата за 10 дни. Колко декара е била нивата?</p>
+    <button class="show-btn" onclick="toggleReshenie('resh10')">Покажи/Скрий решението</button>
+    <div id="resh10" class="reshenie">
+        <div class="two-columns">
+            <div class="left-column">
+                <p>Нека дневната норма по план е <strong>x</strong> декара.</p>
+                <p>Тогава площта на нивата е <strong>12x</strong> декара.</p>
+                <p>В действителност дневната норма е <strong>x + 10</strong> декара.</p>
+                <p>С тази норма изорал нивата за 10 дни → площта е <strong>10(x + 10)</strong> декара.</p>
+                <p><strong>Уравнение:</strong><br>12x = 10(x + 10)</p>
+                <p>12x = 10x + 100<br>2x = 100<br>x = 50</p>
+                <p>Площта на нивата е 12x = 12 × 50 = 600 декара.</p>
+            </div>
+            <div class="right-column">
+                <table>
+                    <tr><th>Вид</th><th>Дневна норма (декара)</th><th>Дни</th><th>Площ (декара)</th></tr>
+                    <tr><td>По план</td><td>x</td><td>12</td><td>12x</td></tr>
+                    <tr><td>В действителност</td><td>x + 10</td><td>10</td><td>10(x + 10)</td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="otgovor">Нивата е 600 декара.</div>
+    </div>
+    <div class="check-answer">
+        <label>Площ на нивата (декара): </label>
+        <input type="number" id="answer10">
+        <button onclick="checkAnswer(10, 600)">Провери</button>
+        <p id="result10" class="result"></p>
+    </div>
+</div>
+
+<div class="zadacha">
+    <h3>Задача 11: Стругар и детайли</h3>
+    <p>Стругар искал да произведе определено количество детайли за определен срок, като произвежда по 20 детайла на ден. След като работил така 4 дни, увеличил дневната си норма с 10 детайла и един ден преди срока произвел 300 детайла повече от предвиденото. За колко дни е бил срокът и колко детайла е трябвало да произведе?</p>
+    <button class="show-btn" onclick="toggleReshenie('resh11')">Покажи/Скрий решението</button>
+    <div id="resh11" class="reshenie">
+        <div class="two-columns">
+            <div class="left-column">
+                <p>Нека плановият срок е <strong>x</strong> дни.</p>
+                <p>Тогава количеството детайли по план е <strong>20x</strong>.</p>
+                <p>Първите 4 дни произвел 80 детайла.</p>
+                <p>Оставащи дни в действителност: x – 5</p>
+                <p>Произвел за оставащите дни: 30(x – 5)</p>
+                <p>Общо произвел: 80 + 30(x – 5) = 20x + 300</p>
+                <p><strong>Уравнение:</strong><br>80 + 30(x – 5) = 20x + 300</p>
+                <p>80 + 30x – 150 = 20x + 300<br>30x – 70 = 20x + 300<br>10x = 370<br>x = 37</p>
+                <p>Детайли по план: 20 × 37 = 740</p>
+            </div>
+            <div class="right-column">
+                <table>
+                    <tr><th>Вид</th><th>Норма (детайла/ден)</th><th>Дни</th><th>Произведени детайли</th></tr>
+                    <tr><td>По план</td><td>20</td><td>x</td><td>20x</td></tr>
+                    <tr><td>В действителност – първи 4 дни</td><td>20</td><td>4</td><td>80</td></tr>
+                    <tr><td>В действителност – останали дни</td><td>30</td><td>x – 5</td><td>30(x – 5)</td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="otgovor">Срокът е 37 дни, поръчката е за 740 детайла.</div>
+    </div>
+    <div class="check-answer">
+        <label>Срок (дни): </label>
+        <input type="number" id="answer11a">
+        <button onclick="checkAnswer(11, 37)">Провери дни</button>
+        <label style="margin-left:20px;">Детайли: </label>
+        <input type="number" id="answer11b">
+        <button onclick="checkAnswer(11, 740)">Провери детайли</button>
+        <p id="result11" class="result"></p>
+    </div>
+</div>
+
+<p style="text-align:center; margin-top:60px;"><a href="index.html" style="font-size:1.2em; color:#3498db; text-decoration:none;">◄ Обратно към началото</a></p>
+
+<script>
+    function toggleReshenie(id) {
+        var el = document.getElementById(id);
+        el.style.display = (el.style.display === "block") ? "none" : "block";
+    }
+
+    function checkAnswer(taskNum, correct) {
+        let inputs = ['answer' + taskNum + 'a', 'answer' + taskNum + 'b', 'answer' + taskNum];
+        let result = document.getElementById('result' + taskNum);
+        let message = "";
+        let allCorrect = true;
+        inputs.forEach(id => {
+            let input = document.getElementById(id);
+            if (input) {
+                let userAnswer = parseFloat(input.value);
+                if (!isNaN(userAnswer) && Math.abs(userAnswer - correct) < 0.01) {
+                    message += "✓ Правилно! ";
+                } else {
+                    allCorrect = false;
+                    message += "✗ Грешно за " + correct + ". ";
+                }
+            }
+        });
+        result.innerHTML = message;
+        result.style.color = allCorrect ? "green" : "red";
+    }
+</script>
 
 </body>
 </html>
