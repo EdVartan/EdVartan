@@ -21,7 +21,6 @@
             padding-bottom: 15px;
             font-size: 2.6em;
         }
-        /* Бутони за бърз достъп с цветове */
         .quick-nav {
             display: flex;
             flex-wrap: wrap;
@@ -49,12 +48,11 @@
             transform: translateY(-8px) scale(1.05);
             box-shadow: 0 15px 35px rgba(0,0,0,0.3);
         }
-        /* Цветове за категориите */
-        .btn-general { background: #3498db; } /* Син */
-        .btn-movement { background: #2ecc71; } /* Зелен */
-        .btn-interest { background: #e67e22; } /* Оранжев */
-        .btn-work { background: #9b59b6; } /* Лилав */
-        .btn-mix { background: #e74c3c; } /* Червен */
+        .btn-general { background: #3498db; }
+        .btn-movement { background: #2ecc71; }
+        .btn-interest { background: #e67e22; }
+        .btn-work { background: #9b59b6; }
+        .btn-mix { background: #e74c3c; }
 
         h2 {
             margin-top: 100px;
@@ -70,6 +68,27 @@
         #interest { background: #e67e22; }
         #work { background: #9b59b6; }
         #mix { background: #e74c3c; }
+
+        .back-to-nav {
+            display: block;
+            text-align: center;
+            margin: 80px auto;
+            padding: 15px 40px;
+            background: #34495e;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            width: fit-content;
+            transition: all 0.3s;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+        .back-to-nav:hover {
+            background: #2c3e50;
+            transform: translateY(-5px);
+        }
 
         h3 {
             color: #2c3e50;
@@ -224,7 +243,6 @@
 <h1>Моделиране на текстови задачи с линейни уравнения</h1>
 <p style="text-align:center; font-size:1.1em; color:#555;">Решете задачите самостоятелно, след това проверете решението си!</p>
 
-<!-- Бутони за бърз достъп с цветове -->
 <div class="quick-nav">
     <button class="nav-btn btn-general" onclick="document.getElementById('general').scrollIntoView({behavior: 'smooth'});">1. Общ характер</button>
     <button class="nav-btn btn-movement" onclick="document.getElementById('movement').scrollIntoView({behavior: 'smooth'});">2. Движение</button>
@@ -317,33 +335,35 @@
 
 <div class="zadacha">
     <h3>Задача 4: Пазар – покупка на два вида стоки</h3>
-    <p>В магазин едни ябълки струват 2,40 лв./кг, а други – 3,60 лв./кг. Купени са общо 15 кг ябълки от двата вида и е платено 45 лв. Колко килограма са купени от всеки вид?</p>
+    <p>В магазин едни ябълки струват 3 лв./кг, а други – 6 лв./кг. Купени са общо 15 кг ябълки от двата вида и е платено 51 лв. Колко килограма са купени от всеки вид?</p>
     <button class="show-btn" onclick="toggleReshenie('resh4')">Покажи/Скрий решението</button>
     <div id="resh4" class="reshenie">
         <div class="two-columns">
             <div class="left-column">
                 <p>Нека от по-евтините е <strong>x</strong> кг.<br>
                 Тогава от по-скъпите е <strong>15 – x</strong> кг.</p>
-                <p><strong>Уравнение:</strong><br>2.4x + 3.6(15 – x) = 45</p>
-                <p>2.4x + 54 – 3.6x = 45<br>–1.2x = –9<br>x = 7.5</p>
+                <p><strong>Уравнение:</strong><br>3x + 6(15 – x) = 51</p>
+                <p>3x + 90 – 6x = 51<br>–3x = –39<br>x = 13</p>
             </div>
             <div class="right-column">
                 <table>
                     <tr><th>Вид ябълки</th><th>Количество (кг)</th><th>Цена (лв./кг)</th><th>Стойност (лв.)</th></tr>
-                    <tr><td>По-евтини</td><td>x</td><td>2.4</td><td>2.4x</td></tr>
-                    <tr><td>По-скъпи</td><td>15 – x</td><td>3.6</td><td>3.6(15 – x)</td></tr>
+                    <tr><td>По-евтини</td><td>x</td><td>3</td><td>3x</td></tr>
+                    <tr><td>По-скъпи</td><td>15 – x</td><td>6</td><td>6(15 – x)</td></tr>
                 </table>
             </div>
         </div>
-        <div class="otgovor">От по-евтините: 7,5 кг<br>От по-скъпите: 7,5 кг</div>
+        <div class="otgovor">От по-евтините: 13 кг<br>От по-скъпите: 2 кг</div>
     </div>
     <div class="check-answer">
         <label>Количество от по-евтините: </label>
-        <input type="number" step="any" id="answer4">
-        <button onclick="checkAnswer(4, 7.5)">Провери</button>
+        <input type="number" id="answer4">
+        <button onclick="checkAnswer(4, 13)">Провери</button>
         <p id="result4" class="result"></p>
     </div>
 </div>
+
+<button class="back-to-nav" onclick="document.querySelector('.quick-nav').scrollIntoView({behavior: 'smooth'});">↑ Обратно към избора на категории</button>
 
 <h2 id="movement">2. Задачи от движение (по суша и вода)</h2>
 
@@ -408,6 +428,8 @@
         <p id="result6" class="result"></p>
     </div>
 </div>
+
+<button class="back-to-nav" onclick="document.querySelector('.quick-nav').scrollIntoView({behavior: 'smooth'});">↑ Обратно към избора на категории</button>
 
 <h2 id="interest">3. Задачи от проста лихва</h2>
 
@@ -507,6 +529,8 @@
     </div>
 </div>
 
+<button class="back-to-nav" onclick="document.querySelector('.quick-nav').scrollIntoView({behavior: 'smooth'});">↑ Обратно към избора на категории</button>
+
 <h2 id="work">4. Задачи от работа (производителност)</h2>
 
 <div class="zadacha">
@@ -535,7 +559,7 @@
         <div class="otgovor">Нивата е 600 декара.</div>
     </div>
     <div class="check-answer">
-        <label>Количество от площта (декара): </label>
+        <label>Площ на нивата (декара): </label>
         <input type="number" id="answer10">
         <button onclick="checkAnswer(10, 600)">Провери</button>
         <p id="result10" class="result"></p>
@@ -581,69 +605,71 @@
     </div>
 </div>
 
+<button class="back-to-nav" onclick="document.querySelector('.quick-nav').scrollIntoView({behavior: 'smooth'});">↑ Обратно към избора на категории</button>
+
 <h2 id="mix">5. Задачи от смеси и сплави</h2>
 
 <div class="zadacha">
     <h3>Задача 12: Смес от два вида кафе</h3>
-    <p>Имаме два вида кафе – първият струва 12 лв./кг и съдържа 80% арабика, вторият – 18 лв./кг и съдържа 100% арабика. Колко килограма от всеки вид трябва да смесим, за да получим 10 кг смес с 90% арабика?</p>
+    <p>Имаме два вида кафе – първият съдържа 70% арабика, вторият – 100% арабика. Колко килограма от всеки вид трябва да смесим, за да получим 10 кг смес с 76% арабика?</p>
     <button class="show-btn" onclick="toggleReshenie('resh12')">Покажи/Скрий решението</button>
     <div id="resh12" class="reshenie">
         <div class="two-columns">
             <div class="left-column">
                 <p>Нека от първия вид вземем <strong>x</strong> кг.</p>
                 <p>Тогава от втория вид: 10 – x кг.</p>
-                <p>Арабика: 0.8x + 1.0(10 – x) = 0.9 × 10</p>
-                <p><strong>Уравнение:</strong><br>0.8x + 10 – x = 9</p>
-                <p>10 – 0.2x = 9<br>0.2x = 1<br>x = 5</p>
+                <p>Арабика: 0.7x + 1.0(10 – x) = 0.76 × 10</p>
+                <p><strong>Уравнение:</strong><br>0.7x + 10 – x = 7.6</p>
+                <p>10 – 0.3x = 7.6<br>0.3x = 2.4<br>x = 8</p>
             </div>
             <div class="right-column">
                 <table>
                     <tr><th>Вид</th><th>Количество (кг)</th><th>Арабика (%)</th><th>Арабика (кг)</th></tr>
-                    <tr><td>Първи</td><td>x</td><td>80</td><td>0.8x</td></tr>
+                    <tr><td>Първи</td><td>x</td><td>70</td><td>0.7x</td></tr>
                     <tr><td>Втори</td><td>10 – x</td><td>100</td><td>10 – x</td></tr>
-                    <tr><td>Смес</td><td>10</td><td>90</td><td>9</td></tr>
+                    <tr><td>Смес</td><td>10</td><td>76</td><td>7.6</td></tr>
                 </table>
             </div>
         </div>
-        <div class="otgovor">От първия вид: 5 кг<br>От втория вид: 5 кг</div>
+        <div class="otgovor">От първия вид: 8 кг<br>От втория вид: 2 кг</div>
     </div>
     <div class="check-answer">
         <label>Количество от първия вид: </label>
-        <input type="number" step="any" id="answer12">
-        <button onclick="checkAnswer(12, 5)">Провери</button>
+        <input type="number" id="answer12">
+        <button onclick="checkAnswer(12, 8)">Провери</button>
         <p id="result12" class="result"></p>
     </div>
 </div>
 
 <div class="zadacha">
     <h3>Задача 13: Смес от две сплави</h3>
-    <p>Имаме сплав с 80% злато и сплав с 50% злато. Колко грама от всяка сплав трябва да смесим, за да получим 100 г сплав с 65% злато?</p>
+    <p>Имаме сплав с 80% злато и сплав с 50% злато. Колко грама от всяка сплав трябва да смесим, за да получим 100 г сплав с 68% злато?</p>
     <button class="show-btn" onclick="toggleReshenie('resh13')">Покажи/Скрий решението</button>
     <div id="resh13" class="reshenie">
         <div class="two-columns">
             <div class="left-column">
                 <p>Нека от 80% сплав вземем <strong>x</strong> г.</p>
                 <p>Тогава от 50% сплав: 100 – x г.</p>
-                <p>Злато: 0.8x + 0.5(100 – x) = 65</p>
-                <p><strong>Уравнение:</strong><br>0.8x + 50 – 0.5x = 65</p>
-                <p>0.3x = 15<br>x = 50</p>
-                <p>От 80% сплав: 50 г<br>От 50% сплав: 50 г</p>
+                <p>Злато: 0.8x + 0.5(100 – x) = 68</p>
+                <p><strong>Уравнение:</strong><br>0.8x + 50 – 0.5x = 68</p>
+                <p>0.3x = 18<br>x = 60</p>
+                <p>От 80% сплав: 60 г<br>От 50% сплав: 40 г</p>
             </div>
             <div class="right-column">
                 <table>
                     <tr><th>Сплав</th><th>Количество (г)</th><th>Чисто в-во (злато, %)</th><th>Злато (г)</th></tr>
                     <tr><td>80%</td><td>x</td><td>80</td><td>0.8x</td></tr>
                     <tr><td>50%</td><td>100 – x</td><td>50</td><td>0.5(100 – x)</td></tr>
-                    <tr><td>Смес</td><td>100</td><td>65</td><td>65</td></tr>
+                    <tr><td>Смес</td><td>100</td><td>68</td><td>68</td></tr>
                 </table>
             </div>
         </div>
-        <div class="otgovor">От 80% сплав: 50 г<br>От 50% сплав: 50 г</div>
+        <div class="otgovor">От 80% сплав: 60 г<br>От 50% сплав: 40 г</div>
     </div>
     <div class="check-answer">
         <label>Количество от 80% сплав: </label>
         <input type="number" id="answer13">
-        <button onclick="checkAnswer(13, 50)">Провери</button>
+        <button onclick="checkAnswer(13, 60)">Провери</button>
         <p id="result13" class="result"></p>
     </div>
 </div>
@@ -684,38 +710,38 @@
 
 <div class="zadacha">
     <h3>Задача 15: Смес от две сплави</h3>
-    <p>Имаме сплав с 90% злато и сплав с 50% злато. Колко грама от всяка сплав трябва да смесим, за да получим 100 г сплав с 70% злато?</p>
+    <p>Имаме сплав с 90% злато и сплав с 50% злато. Колко грама от всяка сплав трябва да смесим, за да получим 100 г сплав с 66% злато?</p>
     <button class="show-btn" onclick="toggleReshenie('resh15')">Покажи/Скрий решението</button>
     <div id="resh15" class="reshenie">
         <div class="two-columns">
             <div class="left-column">
                 <p>Нека от 90% сплав вземем <strong>x</strong> г.</p>
                 <p>Тогава от 50% сплав: 100 – x г.</p>
-                <p>Злато от първата сплав: 0.9x г</p>
-                <p>Злато от втората сплав: 0.5(100 – x) г</p>
-                <p>Общо злато в сместа: 70 г</p>
-                <p><strong>Уравнение:</strong><br>0.9x + 0.5(100 – x) = 70</p>
-                <p>0.9x + 50 – 0.5x = 70<br>0.4x = 20<br>x = 50</p>
-                <p>От 90% сплав: 50 г<br>От 50% сплав: 50 г</p>
+                <p>Злато: 0.9x + 0.5(100 – x) = 66</p>
+                <p><strong>Уравнение:</strong><br>0.9x + 50 – 0.5x = 66</p>
+                <p>0.4x = 16<br>x = 40</p>
+                <p>От 90% сплав: 40 г<br>От 50% сплав: 60 г</p>
             </div>
             <div class="right-column">
                 <table>
                     <tr><th>Сплав</th><th>Количество (г)</th><th>Чисто в-во (злато, %)</th><th>Злато (г)</th></tr>
                     <tr><td>90%</td><td>x</td><td>90</td><td>0.9x</td></tr>
                     <tr><td>50%</td><td>100 – x</td><td>50</td><td>0.5(100 – x)</td></tr>
-                    <tr><td>Смес</td><td>100</td><td>70</td><td>70</td></tr>
+                    <tr><td>Смес</td><td>100</td><td>66</td><td>66</td></tr>
                 </table>
             </div>
         </div>
-        <div class="otgovor">От 90% сплав: 50 г<br>От 50% сплав: 50 г</div>
+        <div class="otgovor">От 90% сплав: 40 г<br>От 50% сплав: 60 г</div>
     </div>
     <div class="check-answer">
         <label>Количество от 90% сплав: </label>
         <input type="number" id="answer15">
-        <button onclick="checkAnswer(15, 50)">Провери</button>
+        <button onclick="checkAnswer(15, 40)">Провери</button>
         <p id="result15" class="result"></p>
     </div>
 </div>
+
+<button class="back-to-nav" onclick="document.querySelector('.quick-nav').scrollIntoView({behavior: 'smooth'});">↑ Обратно към избора на категории</button>
 
 <p style="text-align:center; margin-top:60px;"><a href="index.html" style="font-size:1.2em; color:#3498db; text-decoration:none;">◄ Обратно към началото</a></p>
 
@@ -726,24 +752,15 @@
     }
 
     function checkAnswer(taskNum, correct) {
-        let inputs = ['answer' + taskNum, 'answer' + taskNum + 'a', 'answer' + taskNum + 'b'];
+        let userAnswer = parseFloat(document.getElementById('answer' + taskNum).value);
         let result = document.getElementById('result' + taskNum);
-        let message = "";
-        let allCorrect = true;
-        inputs.forEach(id => {
-            let input = document.getElementById(id);
-            if (input) {
-                let userAnswer = parseFloat(input.value);
-                if (!isNaN(userAnswer) && Math.abs(userAnswer - correct) < 0.01) {
-                    message += "✓ Правилно! ";
-                } else {
-                    allCorrect = false;
-                    message += "✗ Грешно за " + correct + ". ";
-                }
-            }
-        });
-        result.innerHTML = message;
-        result.style.color = allCorrect ? "green" : "red";
+        if (!isNaN(userAnswer) && Math.abs(userAnswer - correct) < 0.01) {
+            result.innerHTML = "✓ Правилно!";
+            result.style.color = "green";
+        } else {
+            result.innerHTML = "✗ Грешно. Правилният отговор е " + correct + ".";
+            result.style.color = "red";
+        }
     }
 </script>
 
