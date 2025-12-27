@@ -158,8 +158,17 @@
         }
         .right-column {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            justify-content: flex-start;
             align-items: center;
+        }
+        .diagram {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            text-align: center;
+            width: 100%;
         }
         table {
             width: 100%;
@@ -381,6 +390,28 @@
                 <p>4x = 14<br>x = 3.5</p>
             </div>
             <div class="right-column">
+                <div class="diagram">
+                    <svg width="300" height="130" viewBox="0 0 300 130" xmlns="http://www.w3.org/2000/svg">
+                        <line x1="30" y1="70" x2="270" y2="70" stroke="#333" stroke-width="4"/>
+                        <circle cx="30" cy="70" r="8" fill="#3498db"/>
+                        <circle cx="270" cy="70" r="8" fill="#3498db"/>
+                        <circle cx="150" cy="70" r="6" fill="#e74c3c"/>
+                        <text x="30" y="50" font-size="16" text-anchor="middle" fill="#333">A</text>
+                        <text x="270" y="50" font-size="16" text-anchor="middle" fill="#333">B</text>
+                        <text x="150" y="90" font-size="14" text-anchor="middle" fill="#e74c3c">C (среща)</text>
+                        <text x="150" y="20" font-size="14" text-anchor="middle" fill="#777">30 км</text>
+                        <!-- Зелената стрелка е повдигната нагоре -->
+                        <line x1="30" y1="30" x2="130" y2="30" stroke="#2ecc71" stroke-width="3" marker-end="url(#arrow)"/>
+                        <text x="80" y="20" font-size="14" text-anchor="middle" fill="#2ecc71">4 км/ч</text>
+                        <line x1="270" y1="100" x2="170" y2="100" stroke="#e67e22" stroke-width="3" marker-end="url(#arrow)"/>
+                        <text x="220" y="110" font-size="14" text-anchor="middle" fill="#e67e22">x км/ч</text>
+                        <defs>
+                            <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+                                <path d="M0,0 L0,6 L9,3 z" fill="#333"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
                 <table>
                     <tr><th>Пешеходец</th><th>V (км/ч)</th><th>t (ч)</th><th>S (км)</th></tr>
                     <tr><td>Първи</td><td>4</td><td>4</td><td>16</td></tr>
@@ -412,6 +443,39 @@
                 <p>3x + 6 = 5x – 10<br>16 = 2x<br>x = 8</p>
             </div>
             <div class="right-column">
+                <div class="diagram">
+                    <svg width="320" height="170" viewBox="0 0 320 170" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="70" width="320" height="40" fill="#a0d8ef" opacity="0.4"/>
+                        <line x1="40" y1="90" x2="280" y2="90" stroke="#333" stroke-width="4"/>
+                        <circle cx="40" cy="90" r="8" fill="#3498db"/>
+                        <circle cx="280" cy="90" r="8" fill="#3498db"/>
+                        <text x="40" y="65" font-size="16" text-anchor="middle" fill="#333">A</text>
+                        <text x="280" y="65" font-size="16" text-anchor="middle" fill="#333">B</text>
+                        <text x="160" y="45" font-size="14" text-anchor="middle" fill="#777">разстояние S км</text>
+                        <line x1="60" y1="60" x2="260" y2="60" stroke="#3498db" stroke-width="3" marker-end="url(#arrowflow)"/>
+                        <text x="160" y="55" font-size="14" text-anchor="middle" fill="#3498db">течение 2 км/ч</text>
+                        <g transform="translate(100,110)">
+                            <rect x="-15" y="-10" width="30" height="20" fill="#2ecc71" rx="5"/>
+                            <text x="0" y="5" font-size="12" text-anchor="middle" fill="white">лодка</text>
+                        </g>
+                        <line x1="40" y1="130" x2="130" y2="130" stroke="#2ecc71" stroke-width="3" marker-end="url(#arrowboat)"/>
+                        <text x="85" y="145" font-size="14" text-anchor="middle" fill="#2ecc71">x + 2 км/ч</text>
+                        <g transform="translate(220,110)">
+                            <rect x="-15" y="-10" width="30" height="20" fill="#e67e22" rx="5"/>
+                            <text x="0" y="5" font-size="12" text-anchor="middle" fill="white">лодка</text>
+                        </g>
+                        <line x1="280" y1="130" x2="190" y2="130" stroke="#e67e22" stroke-width="3" marker-end="url(#arrowboat)"/>
+                        <text x="235" y="145" font-size="14" text-anchor="middle" fill="#e67e22">x – 2 км/ч</text>
+                        <defs>
+                            <marker id="arrowflow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+                                <path d="M0,0 L0,6 L9,3 z" fill="#3498db"/>
+                            </marker>
+                            <marker id="arrowboat" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+                                <path d="M0,0 L0,6 L9,3 z" fill="#333"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
                 <table>
                     <tr><th>Условие</th><th>V (км/ч)</th><th>t (ч)</th><th>S (км)</th></tr>
                     <tr><td>По течение</td><td>x + 2</td><td>3</td><td>3(x + 2)</td></tr>
@@ -752,15 +816,24 @@
     }
 
     function checkAnswer(taskNum, correct) {
-        let userAnswer = parseFloat(document.getElementById('answer' + taskNum).value);
+        let inputs = ['answer' + taskNum, 'answer' + taskNum + 'a', 'answer' + taskNum + 'b'];
         let result = document.getElementById('result' + taskNum);
-        if (!isNaN(userAnswer) && Math.abs(userAnswer - correct) < 0.01) {
-            result.innerHTML = "✓ Правилно!";
-            result.style.color = "green";
-        } else {
-            result.innerHTML = "✗ Грешно. Правилният отговор е " + correct + ".";
-            result.style.color = "red";
-        }
+        let message = "";
+        let allCorrect = true;
+        inputs.forEach(id => {
+            let input = document.getElementById(id);
+            if (input) {
+                let userAnswer = parseFloat(input.value);
+                if (!isNaN(userAnswer) && Math.abs(userAnswer - correct) < 0.01) {
+                    message += "✓ Правилно! ";
+                } else {
+                    allCorrect = false;
+                    message += "✗ Грешно за " + correct + ". ";
+                }
+            }
+        });
+        result.innerHTML = message;
+        result.style.color = allCorrect ? "green" : "red";
     }
 </script>
 
